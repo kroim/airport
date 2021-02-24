@@ -27,11 +27,9 @@ class Main extends BaseController{
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             //load the view
-            $this->load->view('users/header', $data);
-            $this->load->view('main_view', $data);
-            $this->load->view('users/footer');
+            redirect('main/request');
         }else{
-            redirect('User/login');
+            redirect('user/login');
         }
     }
     public function request(){

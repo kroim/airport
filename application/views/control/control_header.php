@@ -54,13 +54,13 @@
             </div>
         </div>
         <div class="tab">
-            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Aircraft</button></a>
-            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Airport</button></a>
-            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Mission</button></a>
-            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Request</button></a>
+            <a href="<?php echo site_url('control/control_aircraft') ?>"><button class="tablinks" style="color: black">Aircraft</button></a>
+            <a href="<?php echo site_url('control/control_airport') ?>"><button class="tablinks" style="color: black">Airport</button></a>
+            <a href="<?php echo site_url('control/control_mission') ?>"><button class="tablinks" style="color: black">Mission</button></a>
+            <a href="<?php echo site_url('control/control_request') ?>"><button class="tablinks" style="color: black">Request</button></a>
             <?php
             if($user['permission'] == 'admin'){
-                ?><a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">User Management</button></a><?php
+                ?><a href="<?php echo site_url('user/getUserAll') ?>"><button class="tablinks" style="color: black">User Management</button></a><?php
             }
             ?>
 
