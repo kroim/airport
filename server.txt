@@ -1,0 +1,20 @@
+bluehost.com
+asd-forts.com
+old pwd: Fer@s123
+new pwd: S$8$9wj-kC$<Qy
+
+ftp:
+FTP Username: kun_airport@asd-forts.com
+FTP server: ftp.asd-forts.com
+FTP & explicit FTPS port:  21
+!@#4567Kun
+
+ftp1 : 
+FTP Username: feras@asd-forts.com
+FTP server: ftp.asd-forts.com
+FTP & explicit FTPS port:  21
+Feras@123
+
+database: asdforts_airport
+user : asdforts_feras
+pass : Feras@123
