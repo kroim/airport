@@ -47,33 +47,23 @@
     <div class="container">
         <div class="row" style="text-align: right">
             <div class="col-lg-11 col-sm-9"></div>
-            <div class="col-lg-1 col-sm-3">
+            <div class="col-lg-2 col-sm-4">
                 <ul class="nav nav-pills">
-                    <li><a href="<?php echo site_url('user/logout') ?>" style="color: yellow; background-color: coral">Logout</a></li>
+                    <li><a href="<?php echo site_url('main/request') ?>" style="color: #fbfff6; background-color: #0b1eff">Home Page</a></li>
                 </ul>
             </div>
         </div>
         <div class="tab">
-            <a href="<?php echo site_url('main/request') ?>"><button class="tablinks" style="color: black">Request List</button></a>
+            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Aircraft</button></a>
+            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Airport</button></a>
+            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Mission</button></a>
+            <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Request</button></a>
             <?php
-            if($user['permission'] == 'manager'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <?php
-            }elseif ($user['permission'] == 'dispatcher'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
-                <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
-                <?php
-            }elseif ($user['permission'] == 'admin'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
-                <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
-                <?php
+            if($user['permission'] == 'admin'){
+                ?><a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">User Management</button></a><?php
             }
             ?>
+
         </div>
     </div>
 </div>

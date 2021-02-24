@@ -30,8 +30,8 @@
             <div class="register-permission">
                 <input type="radio" name="permission" value="admin" <?php if($permission == 'admin' || $permission == '') echo 'checked'?> > admin<br>
                 <input type="radio" name="permission" value="dispatcher" <?php if($permission == 'dispatcher') echo 'checked'?> > dispatcher<br>
-                <input type="radio" name="permission" value="manager" <?php if($permission == 'manager') echo 'checked'?> > customer1<br>
-                <input type="radio" name="permission" value="general MGR" <?php if($permission == 'general MGR') echo 'checked'?> > customer2
+                <input type="radio" name="permission" value="manager" <?php if($permission == 'manager') echo 'checked'?> > manager<br>
+                <input type="radio" name="permission" value="general MGR" <?php if($permission == 'general MGR') echo 'checked'?> > general MGR
             </div>
         </div>
         <div class="form-group">

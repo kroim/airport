@@ -32,7 +32,7 @@
     </style>
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/icon1.png">
 </head>
-<body style="background-image: url('<?php echo base_url()?>assets/images/aircraft-01.png'); width: 100%; height: 100%; margin: 0;">
+<body style="background-image: url('<?php echo base_url()?>assets/images/aircraft-01.png'); background-size: 100%; margin: 0;">
 <div style="padding-top: 10%; padding-left: 60%;">
     <div style=" width: 250px; height: 300px; background-color: #83ff4a;">
         <p style="text-align: center; font-size: 30px; color: #dd7c00; padding-top: 8%;"> Aircraft </p>
@@ -45,7 +45,7 @@
             <input type="submit" class="form-control" name="loginSubmit" id="login-button" value="Login" style="width: 100px;margin-top: 30px;">
             <?php
             if(!empty($success_msg)){
-                echo '<p class="statusMsg">'.$success_msg.'</p>';
+                echo '<p class="statusMsg" style="color: #000000; margin-top: 3px;">' .$success_msg.'</p>';
             }elseif(!empty($error_msg)){
                 echo '<p class="statusMsg" style="color: red; margin-top: 3px;">'.$error_msg.'</p>';
             }
