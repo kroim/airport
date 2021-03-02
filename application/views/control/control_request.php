@@ -23,7 +23,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Add Request</h3>
                 </div>
-                <form method="post" action="<?php echo site_url('control/add_request'); ?>">
+                <form method="post" action="<?php echo site_url('control/add_request'); ?>" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h4> Image of Request </h4>
-                                <input type="file" class="form-control" id="add-request-image" name="add-request-image">
+                                <input type="file" class="form-control" id="add-request-image" name="add-request-image" accept="image/*">
                                 <div style="height: 150px; width: 100%;">
                                     <img src="" style="width: 100%; height: 100%" id="add-request-image-prev">
                                 </div>
@@ -87,7 +87,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
     <!-- Edit Request Modal -->
@@ -99,22 +98,23 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Edit Request</h3>
                 </div>
-                <form method="post" action="<?php echo site_url('control/edit_request'); ?>">
+                <form method="post" action="<?php echo site_url('control/edit_request'); ?>" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Request No. </h4>
+                                <input class="form-control" id="origin-request-id" name="origin-request-id" style="display: none;">
                                 <input class="form-control" id="edit-request-id-m" name="edit-request-id-m">
                                 <h4> Aircraft </h4>
                                 <select class="form-control" id="edit-request-aircraft-m-line" name="edit-request-aircraft-line-m">
                                     <?php foreach ($aircraft as $aircraft_line){
-                                        ?><option value="<?php echo $aircraft_line->aircraft_id?>"><?php echo $aircraft_line->aircraft_name;?></option><?php
+                                        ?><option value="<?php echo $aircraft_line->aircraft_name?>"><?php echo $aircraft_line->aircraft_name;?></option><?php
                                     }?>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <h4> Image of Request </h4>
-                                <input type="file" class="form-control" id="edit-request-image" name="edit-request-image">
+                                <input type="file" class="form-control" id="edit-request-image" name="edit-request-image" accept="image/*">
                                 <div style="height: 150px; width: 100%;">
                                     <img src="" style="width: 100%; height: 100%" id="edit-request-image-prev">
                                 </div>
@@ -125,7 +125,7 @@
                                 <h4> Airport En </h4>
                                 <select class="form-control" id="edit-request-airport-m-line-en" name="edit-request-airport-line-m-en">
                                     <?php foreach ($airport as $airport_line){
-                                        ?><option value="<?php echo $airport_line->airport_id?>"><?php echo $airport_line->airport_icao;?></option><?php
+                                        ?><option value="<?php echo $airport_line->airport_icao?>"><?php echo $airport_line->airport_icao;?></option><?php
                                     }?>
                                 </select>
                             </div>
@@ -133,7 +133,7 @@
                                 <h4> Airport Ar </h4>
                                 <select class="form-control" id="edit-request-airport-m-line-ar" name="edit-request-airport-line-m-ar">
                                     <?php foreach ($airport as $airport_line){
-                                        ?><option value="<?php echo $airport_line->airport_id?>"><?php echo $airport_line->airport_arabic;?></option><?php
+                                        ?><option value="<?php echo $airport_line->airport_arabic?>"><?php echo $airport_line->airport_arabic;?></option><?php
                                     }?>
                                 </select>
                             </div>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info" name="edit-request-button"> Add </button>
+                        <button type="submit" class="btn btn-info" name="edit-request-button"> Edit </button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -177,13 +177,11 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Delete Request</h3>
                 </div>
-                <form method="post" action="<?php echo site_url('control/delete_aircraft'); ?>">
+                <form method="post" action="<?php echo site_url('control/delete_request'); ?>">
                     <div class="modal-body">
                         <h4> Do you agree to delete this data? </h4>
                         <h5 id="request-no-text" style="color: darkmagenta"></h5>
                         <h5 id="request-aircraft-text" style="color: darkmagenta"></h5>
-                        <h5 id="request-from-text" style="color: darkmagenta"></h5>
-                        <h5 id="request-to-text" style="color: darkmagenta"></h5>
                         <h5 id="request-airport-text" style="color: darkmagenta"></h5>
                         <input id="delete-request-id" name="delete-request-id" style="display: none">
                     </div>

@@ -68,7 +68,18 @@ class ControlModel extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
-
+    function addRequest($data){
+        $this->db->insert('request', $data);
+        $this->db->insert_id();
+    }
+    function editRequest($id, $data){
+        $this->db->where('request_id', $id);
+        $this->db->update('request', $data);
+    }
+    function deleteRequest($id){
+        $this->db->where('request_id', $id);
+        $this->db->delete('request');
+    }
     // Mission Database Management
     function getMissionAll(){
         $this->db->select('*');
@@ -82,5 +93,17 @@ class ControlModel extends CI_Model{
         $this->db->where('mission_request_no', $id);
         $query = $this->db->get();
         return $query->result();
+    }
+    function addMission($data){
+        $this->db->insert('mission', $data);
+        $this->db->insert_id();
+    }
+    function editMission($data){
+        $this->db->where('mission_id', $data['mission_id']);
+        $this->db->update('mission', $data);
+    }
+    function deleteMission($id){
+        $this->db->where('mission_id', $id);
+        $this->db->delete('mission');
     }
 }
