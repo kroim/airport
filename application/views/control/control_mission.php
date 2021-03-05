@@ -3,8 +3,11 @@
     <div class="row" style="padding: 1% 1% 1% 1%;">
         <div class="col-md-7">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMissionLine"> Add Mission </button>
+            <?php if($user['permission'] == 'admin'){?>
             <button type="button" class="btn btn-success" id="edit-mission-modal" data-toggle="modal" data-target="#editMissionLine" disabled> Edit Mission </button>
             <button type="button" class="btn btn-success" id="delete-mission-modal" data-toggle="modal" data-target="#deleteMissionLine" disabled> Delete Mission </button>
+                <?php
+            }?>
         </div>
         <div class="col-md-5" style="text-align: right;">
             <form method="post" action="<?php echo site_url('control/control_mission'); ?>">
@@ -27,12 +30,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Request No. </h4>
-                                <select class="form-control" id="add-mission-request-no" name="add-mission-request-no" onchange='select_request_for_mission(event, <?php echo json_encode($request);?>)' required>
-                                    <option label="Select"></option>
-                                    <?php foreach ($request as $request_line){
-                                        ?><option value="<?php echo $request_line->request_id; ?>"><?php echo $request_line->request_id; ?></option><?php
-                                    }?>
-                                </select>
+                                <input class="form-control" id="add-mission-request-no" name="add-mission-request-no" onchange='select_request_for_mission(event, <?php echo json_encode($request);?>)' required>
+<!--                                    <option label="Select"></option>-->
+<!--                                    --><?php //foreach ($request as $request_line){
+//                                        ?><!--<option value="--><?php //echo $request_line->request_id; ?><!--">--><?php //echo $request_line->request_id; ?><!--</option>--><?php
+//                                    }?>
+<!--                                </input>-->
                             </div>
                             <div class="col-md-6">
                                 <h4> Aircraft </h4>
@@ -56,7 +59,7 @@
                             </div>
                             <div class="col-md-3">
                                 <h4> Hours </h4>
-                                <input type="number" class="form-control" id="add-mission-hours" name="add-mission-hours">
+                                <input type="number" step="0.1" class="form-control" id="add-mission-hours" name="add-mission-hours">
                             </div>
                             <div class="col-md-3">
                                 <h4> Cycles </h4>
@@ -104,12 +107,12 @@
                             <div class="col-md-6">
                                 <h4> Request No. </h4>
                                 <input id="edit-mission-id" name="edit-mission-id" style="display: none;">
-                                <select class="form-control" id="edit-mission-request-no" name="edit-mission-request-no" onchange='edit_request_for_mission(event, <?php echo json_encode($request);?>)' required>
-                                    <option label="Select"></option>
-                                    <?php foreach ($request as $request_line){
-                                        ?><option value="<?php echo $request_line->request_id; ?>"><?php echo $request_line->request_id; ?></option><?php
-                                    }?>
-                                </select>
+                                <input class="form-control" id="edit-mission-request-no" name="edit-mission-request-no" onchange='edit_request_for_mission(event, <?php echo json_encode($request);?>)' required>
+<!--                                    <option label="Select"></option>-->
+<!--                                    --><?php //foreach ($request as $request_line){
+//                                        ?><!--<option value="--><?php //echo $request_line->request_id; ?><!--">--><?php //echo $request_line->request_id; ?><!--</option>--><?php
+//                                    }?>
+<!--                                </input>-->
                             </div>
                             <div class="col-md-6">
                                 <h4> Aircraft </h4>

@@ -4,8 +4,11 @@
     <div class="row" style="padding: 1% 1% 1% 1%;">
         <div class="col-md-7">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addRequestLine"> Add Request </button>
+            <?php if($user['permission'] == 'admin'){?>
             <button type="button" class="btn btn-success" id="edit-request-modal" data-toggle="modal" data-target="#editRequestLine" disabled> Edit Request </button>
             <button type="button" class="btn btn-success" id="delete-request-modal" data-toggle="modal" data-target="#deleteRequestLine" disabled> Delete Request </button>
+                <?php
+            }?>
         </div>
         <div class="col-md-5" style="text-align: right;">
             <form method="post" action="<?php echo site_url('control/control_request'); ?>">
@@ -45,7 +48,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Airport En </h4>
-                                <select class="form-control" id="add-request-airport-m-line-en" name="add-request-airport-line-m-en">
+                                <select class="form-control" id="add-request-airport-m-line-en" name="add-request-airport-line-m-en" onchange='airport_same1(event, <?php echo json_encode($airport); ?>)'>
                                     <?php foreach ($airport as $airport_line){
                                         ?><option value="<?php echo $airport_line->airport_icao?>"><?php echo $airport_line->airport_icao;?></option><?php
                                     }?>
@@ -53,7 +56,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h4> Airport Ar </h4>
-                                <select class="form-control" id="add-request-airport-m-line-ar" name="add-request-airport-line-m-ar">
+                                <select class="form-control" id="add-request-airport-m-line-ar" name="add-request-airport-line-m-ar" onchange='airport_same2(event, <?php echo json_encode($airport); ?>)'>
                                     <?php foreach ($airport as $airport_line){
                                         ?><option value="<?php echo $airport_line->airport_arabic?>"><?php echo $airport_line->airport_arabic;?></option><?php
                                     }?>
@@ -123,7 +126,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Airport En </h4>
-                                <select class="form-control" id="edit-request-airport-m-line-en" name="edit-request-airport-line-m-en">
+                                <select class="form-control" id="edit-request-airport-m-line-en" name="edit-request-airport-line-m-en" onchange='airport_same3(event, <?php echo json_encode($airport); ?>)'>
                                     <?php foreach ($airport as $airport_line){
                                         ?><option value="<?php echo $airport_line->airport_icao?>"><?php echo $airport_line->airport_icao;?></option><?php
                                     }?>
@@ -131,7 +134,7 @@
                             </div>
                             <div class="col-md-6">
                                 <h4> Airport Ar </h4>
-                                <select class="form-control" id="edit-request-airport-m-line-ar" name="edit-request-airport-line-m-ar">
+                                <select class="form-control" id="edit-request-airport-m-line-ar" name="edit-request-airport-line-m-ar" onchange='airport_same4(event, <?php echo json_encode($airport); ?>)'>
                                     <?php foreach ($airport as $airport_line){
                                         ?><option value="<?php echo $airport_line->airport_arabic?>"><?php echo $airport_line->airport_arabic;?></option><?php
                                     }?>

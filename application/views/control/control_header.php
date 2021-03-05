@@ -60,7 +60,7 @@
             <a href="<?php echo site_url('control/control_request') ?>"><button class="tablinks" style="color: black">Request</button></a>
             <?php
             if($user['permission'] == 'admin'){
-                ?><a href="<?php echo site_url('user/getUserAll') ?>"><button class="tablinks" style="color: black">User Management</button></a><?php
+                ?><a href="<?php echo site_url('user/get_users') ?>"><button class="tablinks" style="color: black">User Management</button></a><?php
             }
             ?>
 

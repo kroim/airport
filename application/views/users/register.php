@@ -11,7 +11,7 @@
     <?php echo form_error('conf_password','<span class="help-block">','</span>'); ?>
     <form action="" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="Name" required="" value="<?php echo !empty($user['name'])?$user['name']:''; ?>">
+            <input type="text" class="form-control" name="name" placeholder="Name" required="" value="<?php echo !empty($userData['name'])?$userData['name']:''; ?>">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required="">
@@ -22,7 +22,7 @@
         <div class="form-group">
             <?php
             if(!empty($user['permission'])){
-                $permission = $user['permission'];
+                $permission = $userData['permission'];
             }else{
                 $permission = '';
             }

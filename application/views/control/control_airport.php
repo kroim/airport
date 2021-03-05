@@ -2,9 +2,14 @@
 <div class="container">
     <h3 style="color: #154ecc; text-align: center; background-color: #ffc349">Airport Management</h3>
     <div class="row" style="padding: 1% 1% 1% 1%;">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAirportLine"> Add Airport </button>
-        <button type="button" class="btn btn-success" id="edit-airport-modal" data-toggle="modal" data-target="#editAirportLine" disabled> Edit Airport </button>
-        <button type="button" class="btn btn-success" id="delete-airport-modal" data-toggle="modal" data-target="#deleteAirportLine" disabled> Delete Airport </button>
+        <div class="col-md-7">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAirportLine"> Add Airport </button>
+            <?php if($user['permission'] == 'admin'){?>
+            <button type="button" class="btn btn-success" id="edit-airport-modal" data-toggle="modal" data-target="#editAirportLine" disabled> Edit Airport </button>
+            <button type="button" class="btn btn-success" id="delete-airport-modal" data-toggle="modal" data-target="#deleteAirportLine" disabled> Delete Airport </button>
+                <?php
+            }?>
+        </div>
     </div>
     <!-- Add Aircraft Modal -->
     <div class="modal fade" id="addAirportLine" role="dialog">

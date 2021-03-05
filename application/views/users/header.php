@@ -63,17 +63,17 @@
             }elseif ($user['permission'] == 'dispatcher'){
                 ?>
                 <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
                 <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
                 <?php
             }elseif ($user['permission'] == 'admin'){
                 ?>
                 <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
                 <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
                 <?php
             }
             ?>
+            <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
+            <a href="#"><button class="tablinks" style="color: black">Get Request Image</button></a>
         </div>
     </div>
 </div>

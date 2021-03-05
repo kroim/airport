@@ -84,14 +84,24 @@ class User extends CI_Controller {
                 $insert = $this->UserModel->insert($userData);
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Register Success!');
-                    redirect('user/login');
+                    redirect('user/get_users');
                 }else{
                     $data['error_msg'] = 'Register Failed';
                 }
             }
         }
-        $data['user'] = $userData;
-        $this->load->view('users/register', $data);
+        $data['userData'] = $userData;
+        $userInfo = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
+        $data['user'] = $userInfo;
+        $data['title'] = "User Management";
+        if ($userInfo['permission'] == 'admin'){
+            $data['user_data'] = $this->UserModel->get_users();
+            $this->load->view('control/control_header', $data);
+            $this->load->view('users/add_user', $data);
+            $this->load->view('users/footer');
+        }else{
+            redirect('user/login');
+        }
     }
     /*
      * User logout
@@ -115,6 +125,29 @@ class User extends CI_Controller {
             return false;
         }else{
             return true;
+        }
+    }
+
+    function get_users(){
+        $userInfo = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
+        $data['user'] = $userInfo;
+        $data['title'] = "User Management";
+        if ($userInfo['permission'] == 'admin'){
+            $data['user_data'] = $this->UserModel->get_users();
+            $this->load->view('control/control_header', $data);
+            $this->load->view('control/control_user', $data);
+            $this->load->view('users/footer');
+        }else{
+            redirect('user/login');
+        }
+    }
+    function delete_user(){
+        if ($this->input->post()){
+            $id = $this->input->post('delete-user-id');
+            $this->UserModel->delete_user($id);
+            redirect('user/get_users');
+        }else{
+            redirect('user/get_users');
         }
     }
 }
