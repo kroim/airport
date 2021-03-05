@@ -277,3 +277,28 @@ function edit_user_line(data1, data2) {
         }
     }
 }
+
+/////// Main
+function main_request_line(data_line, data) {
+    var request_id = data_line['request_id'];
+    var request_img = data_line['image'];
+    var pathArray = location.href.split( '/' );
+    var protocol = pathArray[0];
+    var host = pathArray[2];
+    var project = pathArray[3];
+    var url = protocol + '//' + host + '/' + project + '/';
+    for(var index = 0; index < data.length; index++){
+        if(data[index]['request_id'] == request_id){
+            $("#main-request-" + request_id).css('background-color', 'cornflowerblue');
+            $("#requestImg").attr('src', url + request_img);
+            $("#request_image_data").val(url + request_img);
+        }else{
+            $("#main-request-" + data[index]['request_id']).css('background-color', 'white');
+        }
+    }
+
+
+}
+function get_request_image() {
+    $("#image-modal-button1").click();
+}
