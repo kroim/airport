@@ -43,9 +43,12 @@
     </style>
 </head>
 <body>
-<div style="background-image: url(<?php echo base_url('assets/images/header1.png'); ?>">
+<div style="background-image: url(<?php echo base_url('assets/images/header1.png'); ?>);">
     <div class="container">
-        <div class="row" style="text-align: right">
+        <div class="logo" style="text-align: center; height: 100px; padding-top: 1%;">
+            <img src="<?php echo base_url('assets/images/logo.png')?>" style="height: 100%;">
+        </div>
+        <div class="row" style="text-align: right; padding-right: 1%;">
             <div class="col-lg-11 col-sm-9"></div>
             <div class="col-lg-1 col-sm-3">
                 <ul class="nav nav-pills">
@@ -72,9 +75,53 @@
                 <?php
             }
             ?>
-            <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
+            <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal" style="color: black">Get Report</button></a>
             <a><button class="tablinks" onclick="get_request_image()" style="color: black">Get Request Image</button></a>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="select-table-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #d5d6d5">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="font-family: 'Times New Roman'">Select Report Format</h3>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Request / Mission</h4>
+                            <select class="form-control" id="select-re-mi">
+                                <option value="re">Request</option>
+                                <option value="mi">Mission</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>English / Arabic</h4>
+                            <select class="form-control" id="select-lang">
+                                <option value="en">English</option>
+                                <option value="ar">Arabic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <h4 style="text-align: center;">Input Report Name</h4>
+                            <input class="form-control" id="select-rname" placeholder="Report Name">
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="select_report_format()"> Get Report </button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -296,9 +296,57 @@ function main_request_line(data_line, data) {
             $("#main-request-" + data[index]['request_id']).css('background-color', 'white');
         }
     }
-
-
 }
 function get_request_image() {
     $("#image-modal-button1").click();
+}
+
+function select_report_format() {
+    var tb_format = $("#select-re-mi").val();
+    var lang_format = $("#select-lang").val();
+    if(tb_format == 're'){
+        if(lang_format == 'en'){
+            $("#table-re-en").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: $('#select-rname').val(),
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        }else if(lang_format == 'ar'){
+            $("#table-re-ar").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: $('#select-rname').val(),
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        }
+    }else if(tb_format == 'mi'){
+        if(lang_format == 'en'){
+            $("#table-mi-en").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: $('#select-rname').val(),
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        }else if(lang_format == 'ar'){
+            $("#table-mi-ar").table2excel({
+                exclude: ".noExl",
+                name: "Excel Document Name",
+                filename: $('#select-rname').val(),
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true
+            });
+        }
+    }
 }

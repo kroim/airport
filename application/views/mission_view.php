@@ -69,5 +69,129 @@
         ?>
         </tbody>
     </table>
-
 </div>
+
+<!--report table format-->
+
+<div class="download-mission-table" style="display: none;">
+    <table class="table table-striped table-bordered" id="table-mi-en" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Request No.</th>
+            <th>ACFT</th>
+            <th>Date</th>
+            <th>Purpose of Operation</th>
+            <th>Airport</th>
+            <th>City</th>
+            <th>Flying Hours</th>
+            <th>Cycles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($searchData as $missionRow){
+            ?><tr><td><?php echo $missionRow->mission_request_no;?></td>
+            <td><?php echo $missionRow->aircraft_name;?></td>
+            <td><?php echo $missionRow->date;?></td>
+            <td><?php echo $missionRow->purpose_en;?></td>
+            <td><?php echo $missionRow->airport_name;?></td>
+            <td><?php
+                for($index = 0; $index < sizeof($airportData); $index++){
+                    if($airportData[$index]->airport_icao == $missionRow->airport_name){
+                        echo $airportData[$index]->airport_city;
+                        break;
+                    }
+                }
+                ?></td>
+            <td><?php echo $missionRow->hours;?></td>
+            <td><?php echo $missionRow->cycles;?></td></tr><?php
+        }
+        ?>
+        </tbody>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr><?php
+        $total = 0;
+        for($count1 = 0; $count1 < sizeof($aircraftData); $count1++){
+            $sum = 0;
+            for($count2 = 0; $count2 < sizeof($searchData); $count2++){
+                if($aircraftData[$count1]->aircraft_name == $searchData[$count2]->aircraft_name){
+                    $sum += floatval($searchData[$count2]->hours);
+                }
+            }
+            $total += $sum;
+            ?><tr>
+                <td></td><td></td><td></td>
+                <td><?php echo $aircraftData[$count1]->aircraft_name." + ".$aircraftData[$count1]->aircraft_model; ?></td>
+                <td><?php echo $sum; ?></td>
+            </tr><?php
+        }
+        ?><tr><td></td></tr><tr>
+            <td></td><td></td><td></td>
+            <td><?php echo "TOTAL FLYING HOURS" ?></td>
+            <td><?php echo $total; ?></td>
+        </tr>
+    </table>
+</div>
+
+<div class="download-mission-table" style="display: none;">
+    <table class="table table-striped table-bordered" id="table-mi-ar" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Request No.</th>
+            <th>ACFT</th>
+            <th>Date</th>
+            <th>Purpose of Operation</th>
+            <th>Airport</th>
+            <th>City</th>
+            <th>Flying Hours</th>
+            <th>Cycles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($searchData as $missionRow){
+            ?><tr><td><?php echo $missionRow->mission_request_no;?></td>
+            <td><?php echo $missionRow->aircraft_name;?></td>
+            <td><?php echo $missionRow->date;?></td>
+            <td><?php echo $missionRow->purpose_ar;?></td>
+            <td><?php echo $missionRow->airport_ar_name;?></td>
+            <td><?php
+                for($index = 0; $index < sizeof($airportData); $index++){
+                    if($airportData[$index]->airport_icao == $missionRow->airport_name){
+                        echo $airportData[$index]->airport_city;
+                        break;
+                    }
+                }
+                ?></td>
+            <td><?php echo $missionRow->hours;?></td>
+            <td><?php echo $missionRow->cycles;?></td></tr><?php
+        }
+        ?>
+        </tbody>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr><?php
+        $total = 0;
+        for($count1 = 0; $count1 < sizeof($aircraftData); $count1++){
+            $sum = 0;
+            for($count2 = 0; $count2 < sizeof($searchData); $count2++){
+                if($aircraftData[$count1]->aircraft_name == $searchData[$count2]->aircraft_name){
+                    $sum += floatval($searchData[$count2]->hours);
+                }
+            }
+            $total += $sum;
+            ?><tr>
+            <td></td><td></td><td></td>
+            <td><?php echo $aircraftData[$count1]->aircraft_name." + ".$aircraftData[$count1]->aircraft_model; ?></td>
+            <td><?php echo $sum; ?></td>
+            </tr><?php
+        }
+        ?><tr><td></td></tr><tr>
+            <td></td><td></td><td></td>
+            <td><?php echo "TOTAL FLYING HOURS" ?></td>
+            <td><?php echo $total; ?></td>
+        </tr>
+    </table>
+</div>
+

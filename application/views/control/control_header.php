@@ -45,6 +45,9 @@
 <body>
 <div style="background-image: url(<?php echo base_url('assets/images/header1.png'); ?>">
     <div class="container">
+        <div class="logo" style="text-align: center; height: 100px; padding-top: 1%;">
+            <img src="<?php echo base_url('assets/images/logo.png')?>" style="height: 100%;">
+        </div>
         <div class="row" style="text-align: right">
             <div class="col-lg-11 col-sm-9"></div>
             <div class="col-lg-2 col-sm-4">

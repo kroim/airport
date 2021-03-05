@@ -21,6 +21,7 @@ class Main extends BaseController{
         $this->load->helper(array('form', 'url'));
         $this->load->model('UserModel');
         $this->load->model('MainModel');
+        $this->load->model('ControlModel');
     }
     public function index(){
         $data = array();
@@ -49,6 +50,8 @@ class Main extends BaseController{
         }
         $data['aircraftData'] = $this->MainModel->getAircraftAll();
         $data['title'] = "Request List";
+        $data['airportData'] = $this->ControlModel->getAirportAll();
+        $data['missionData'] = $this->MainModel->getMissionAll();
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             //load the view
@@ -76,6 +79,7 @@ class Main extends BaseController{
         }
         $data['aircraftData'] = $this->MainModel->getAircraftAll();
         $data['title'] = "Mission List";
+        $data['airportData'] = $this->ControlModel->getAirportAll();
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             //load the view

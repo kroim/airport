@@ -18,7 +18,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3">Date From: <input class="request-input" type="date" name="request-from" ></div>
+            <div class="col-md-3">Date From: <input class="request-input" type="date" name="request-from"></div>
             <div class="col-md-3">Date To: <input class="request-input" type="date" name="request-to" ></div>
         </div>
         <div class="row" style="padding-top: 1%;">
@@ -73,7 +73,7 @@
         </tbody>
     </table>
 
-    <button ctype="button" data-toggle="modal" id="image-modal-button1" data-target="#image-modal" style="display: none;"></button>
+    <button type="button" data-toggle="modal" id="image-modal-button1" data-target="#image-modal" style="display: none;"></button>
     <!-- The Modal -->
     <div class="modal fade" id="image-modal" role="dialog">
         <div class="modal-dialog">
@@ -96,4 +96,93 @@
 
         </div>
     </div>
+</div>
+
+<div class="download-request-table" style="display: none;">
+    <table class="table table-striped table-bordered" id="table-re-en" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Request No.</th>
+            <th>ACFT</th>
+            <th>Date From</th>
+            <th>Date To</th>
+            <th>Purpose of Operation</th>
+            <th>Airport</th>
+            <th>City</th>
+            <th>Total Flying Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($searchData as $requestRow){
+            ?><tr><td><?php echo $requestRow->request_id;?></td><?php
+            ?><td><?php echo $requestRow->aircraft;?></td><?php
+            ?><td><?php echo $requestRow->from;?></td><?php
+            ?><td><?php echo $requestRow->to;?></td><?php
+            ?><td><?php echo $requestRow->purpose;?></td><?php
+            ?><td><?php echo $requestRow->airport;?></td><?php
+            ?><td><?php
+                for($index = 0; $index < sizeof($airportData); $index++){
+                    if($airportData[$index]->airport_icao == $requestRow->airport){
+                        echo $airportData[$index]->airport_city;
+                        break;
+                    }
+                }
+                ?></td><?php
+            ?><td><?php
+                $sum = 0;
+                for ($index1 = 0; $index1 < sizeof($missionData); $index1++){
+                    if ($missionData[$index1]->mission_request_no == $requestRow->request_id){
+                        $sum += floatval($missionData[$index1]->hours);
+                    }
+                }
+                echo $sum;?></td></tr><?php
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+<div class="download-request-table" style="display: none;">
+    <table class="table table-striped table-bordered" id="table-re-ar" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Request No.</th>
+            <th>ACFT</th>
+            <th>Date From</th>
+            <th>Date To</th>
+            <th>Purpose of Operation</th>
+            <th>Airport</th>
+            <th>City</th>
+            <th>Total Flying Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($searchData as $requestRow){
+            ?><tr><td><?php echo $requestRow->request_id;?></td><?php
+            ?><td><?php echo $requestRow->aircraft;?></td><?php
+            ?><td><?php echo $requestRow->from;?></td><?php
+            ?><td><?php echo $requestRow->to;?></td><?php
+            ?><td><?php echo $requestRow->purpose_ar;?></td><?php
+            ?><td><?php echo $requestRow->airport_ar;?></td><?php
+            ?><td><?php
+                for($index = 0; $index < sizeof($airportData); $index++){
+                    if($airportData[$index]->airport_icao == $requestRow->airport){
+                        echo $airportData[$index]->airport_city;
+                        break;
+                    }
+                }
+                ?></td><?php
+            ?><td><?php
+                $sum = 0;
+                for ($index1 = 0; $index1 < sizeof($missionData); $index1++){
+                    if ($missionData[$index1]->mission_request_no == $requestRow->request_id){
+                        $sum += floatval($missionData[$index1]->hours);
+                    }
+                }
+                echo $sum;?></td></tr><?php
+        }
+        ?>
+        </tbody>
+    </table>
 </div>
