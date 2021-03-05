@@ -86,4 +86,16 @@ class Main extends BaseController{
             redirect('User/login');
         }
     }
+
+    public function download_image(){
+        $this->load->helper('download'); //load helper
+        if($this->input->post('request_image_data') != ""){
+            $filepath = $this->input->post('request_image_data');
+            $filename = $this->input->post('request_image_filename');
+            $file_data = file_get_contents($filepath);
+            force_download($filename.".png", $file_data);
+        }else{
+            redirect('main/request');
+        }
+    }
 }

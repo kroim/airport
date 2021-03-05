@@ -73,7 +73,7 @@
             }
             ?>
             <a href="#"><button class="tablinks" style="color: black">Get Report</button></a>
-            <a href="#"><button class="tablinks" style="color: black">Get Request Image</button></a>
+            <a><button class="tablinks" onclick="get_request_image()" style="color: black">Get Request Image</button></a>
         </div>
     </div>
 </div>

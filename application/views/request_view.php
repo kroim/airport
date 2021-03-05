@@ -47,26 +47,53 @@
         <tbody>
         <?php
             foreach ($searchData as $requestRow){
-                ?><tr><td><?php echo $requestRow->request_id;?></td><?php
+                ?><tr id="main-request-<?php echo $requestRow->request_id;?>" onclick='main_request_line(<?php echo json_encode($requestRow);?>, <?php echo json_encode($searchData);?>)'><td><?php echo $requestRow->request_id;?></td><?php
                 ?><td><?php echo $requestRow->aircraft;?></td><?php
                 ?><td><?php echo $requestRow->from;?></td><?php
                 ?><td><?php echo $requestRow->to;?></td><?php
                 ?><td><?php echo $requestRow->airport;?></td><?php
                 ?><td><?php echo $requestRow->airport_ar;?></td><?php
                 ?><td><?php echo $requestRow->purpose;?></td><?php
-                ?><td><?php
+                ?><?php
                     $currentDate = date("Y-m-d");
                     if($currentDate<$requestRow->from){
-                        echo "Stand By";
+                        ?><td style='color: blue'><div class="col-md-4">Scheduled</div>
+                        <div class="col-md-8"><img src="<?php echo base_url('assets/images/btn2.png')?>" style="height: 20px;"></div>
+                        </td><?php
                     }elseif ($currentDate>$requestRow->to){
-                        echo "Complete";
+                        ?><td><div class="col-md-4">Completed</div></td><?php
                     }else{
-                        echo "Active";
+                        ?><td style='color: green'><div class="col-md-4">Active</div>
+                        <div class="col-md-8"><img src="<?php echo base_url('assets/images/btn1.png')?>" style="height: 20px;"></div>
+                        </td><?php
                     }
-                    ?></td></tr><?php
+                    ?></tr><?php
             }
         ?>
         </tbody>
     </table>
 
+    <button ctype="button" data-toggle="modal" id="image-modal-button1" data-target="#image-modal" style="display: none;"></button>
+    <!-- The Modal -->
+    <div class="modal fade" id="image-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form method="post" action="<?php echo site_url('main/download_image'); ?>" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div style="padding-bottom: 1%;">
+                            <input id="request_image_data" name="request_image_data" style="display: none;">
+                            <img src="" id="requestImg" style="height: 400px; width: 100%;">
+                        </div>
+                        <input id="request_image_filename" class="form-control" name="request_image_filename" placeholder="download name" required/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" name="download-image-button"> Download </button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
