@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100126
 File Encoding         : 65001
 
-Date: 2017-12-12 02:37:44
+Date: 2017-12-15 21:59:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,8 +66,8 @@ CREATE TABLE `mission` (
   `airport_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `airport_ar_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `hours` decimal(10,0) DEFAULT NULL,
-  `cycles` decimal(10,0) DEFAULT NULL,
+  `hours` double DEFAULT NULL,
+  `cycles` double DEFAULT NULL,
   `purpose_en` text COLLATE utf8_unicode_ci,
   `purpose_ar` text COLLATE utf8_unicode_ci,
   `notes` text COLLATE utf8_unicode_ci,
@@ -77,12 +77,13 @@ CREATE TABLE `mission` (
 -- ----------------------------
 -- Records of mission
 -- ----------------------------
-INSERT INTO `mission` VALUES ('1', '1', 'HZ-ZAA', 'OEJN', null, '2017-11-17', '2', '3', 'Test Note1', null, 'Test Notes1');
-INSERT INTO `mission` VALUES ('2', '3', 'HZ-ZAY', 'OEDF', null, '2017-12-26', '12', '19', 'Test Note2', null, 'Test Notes2');
-INSERT INTO `mission` VALUES ('3', '2', 'HZ-ZAQ', 'OERK', '', '2017-11-03', '8', '12', 'hejfle', 'dfasdfa', 'dfasfadsfasdf');
-INSERT INTO `mission` VALUES ('4', '4', 'HZ-ZAY', 'OERK', null, '2017-12-02', '12', '15', 'dsfsadf', 'dfsadf', 'dfsadsfs');
-INSERT INTO `mission` VALUES ('5', '3', 'HZ-ZAY', 'OEDF', '', '2017-12-23', '3', '5', 'df', 'dfsa', 'sdfasfsdaf');
-INSERT INTO `mission` VALUES ('6', '5', 'HZ-AAB', 'OEDF', '', '2017-12-04', '4', '9', 'sdsddfa', 'sfsdafsadf', 'dfasfdsfsdaf');
+INSERT INTO `mission` VALUES ('1', '1', 'HZ-ZAA', 'OEJN', 'مطار الملك عبدالعزيز الدولي', '2017-11-17', '2', '3', 'Test Note1', '', 'Test Notes1');
+INSERT INTO `mission` VALUES ('2', '3', 'HZ-ZAY', 'OEDF', 'مطار الملك فهد الدولي', '2017-12-26', '12', '19', 'Test Note2', '', 'Test Notes2');
+INSERT INTO `mission` VALUES ('3', '2', 'HZ-ZAQ', 'OERK', 'مطار الملك خالد الدولي', '2017-11-03', '8', '12', 'hejfle', 'dfasdfa', 'dfasfadsfasdf');
+INSERT INTO `mission` VALUES ('4', '4', 'HZ-ZAY', 'OERK', 'مطار الملك خالد الدولي', '2017-12-02', '12', '15', 'dsfsadf', 'dfsadf', 'dfsadsfs');
+INSERT INTO `mission` VALUES ('5', '3', 'HZ-ZAY', 'OEDF', 'مطار الملك فهد الدولي', '2017-12-23', '3', '5', 'df', 'dfsa', 'sdfasfsdaf');
+INSERT INTO `mission` VALUES ('6', '5', 'HZ-AAB', 'OEDF', 'مطار الملك فهد الدولي', '2017-12-04', '4', '9', 'sdsddfa', 'sfsdafsadf', 'dfasfdsfsdaf');
+INSERT INTO `mission` VALUES ('7', '3', 'HZ-ZAY', 'OEDF', 'مطار الملك فهد الدولي', '2017-12-14', '4.5', '3', 'ss', 'as', 'as');
 
 -- ----------------------------
 -- Table structure for request
@@ -100,13 +101,13 @@ CREATE TABLE `request` (
   `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`request_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of request
 -- ----------------------------
 INSERT INTO `request` VALUES ('1', 'HZ-ZAA', '2017-11-15', '2017-11-25', 'OEJN', 'مطار الملك عبدالعزيز الدولي', 'Test1', null, null, null);
-INSERT INTO `request` VALUES ('2', 'HZ-ZAQ', '2017-11-02', '2017-11-08', 'OERK', 'مطار الملك خالد الدولي', 'Test2', null, null, null);
+INSERT INTO `request` VALUES ('2', 'HZ-ZAQ', '2017-11-02', '2017-11-08', 'OERK', 'مطار الملك خالد الدولي', 'Test2', '', null, 'uploads/1513017847.png');
 INSERT INTO `request` VALUES ('3', 'HZ-ZAY', '2017-11-24', '2017-12-28', 'OEDF', 'مطار الملك فهد الدولي', 'Test3', null, null, null);
 INSERT INTO `request` VALUES ('4', 'HZ-ZAY', '2017-12-01', '2017-12-03', 'OERK', 'مطار الملك خالد الدولي', 'test english', 'test arabic', null, 'uploads/1512977568.png');
 INSERT INTO `request` VALUES ('5', 'HZ-AAB', '2017-12-04', '2017-12-09', 'OEDF', 'مطار الملك فهد الدولي', 'enal ', 'dfsafsdfsfsdfds', null, 'uploads/1512978311.png');
@@ -122,7 +123,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `permission` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
