@@ -3,6 +3,9 @@ function checkAircraft(id) {
     console.log('#req-aircraft'+id);
     $("#req-aircraft"+id).click();
 }
+
+// aircraft part ...................
+
 function edit_aircraft_line(data1, data2) {
     var id = data1['aircraft_id'];
     var name = data1['aircraft_name'];
@@ -23,6 +26,9 @@ function edit_aircraft_line(data1, data2) {
         }
     }
 }
+
+// airport part ................./////
+
 function edit_airport_line(data1, data2) {
     var id = data1['airport_id'];
     var icao = data1['airport_icao'];
@@ -47,6 +53,9 @@ function edit_airport_line(data1, data2) {
         }
     }
 }
+
+// request part ....................//
+
 function edit_request_line(data1, data2, data3, data4) {
     var id = data1['request_id'];
     var aircraft = data1['aircraft'];
@@ -122,6 +131,35 @@ $("#edit-request-image").change(function () {
         reader.readAsDataURL(this.files[0]);
     }
 });
+function airport_same1(event, data) {
+    for(var index = 0; index < data.length; index++){
+        if(data[index]['airport_icao'] == event.target.value){
+            $("#add-request-airport-m-line-ar").val(data[index]['airport_arabic']);
+        }
+    }
+}
+function airport_same2(event, data) {
+    for(var index = 0; index < data.length; index++){
+        if(data[index]['airport_arabic'] == event.target.value){
+            $("#add-request-airport-m-line-en").val(data[index]['airport_icao']);
+        }
+    }
+}
+function airport_same3(event, data) {
+    for(var index = 0; index < data.length; index++){
+        if(data[index]['airport_icao'] == event.target.value){
+            $("#edit-request-airport-m-line-ar").val(data[index]['airport_arabic']);
+        }
+    }
+}
+function airport_same4(event, data) {
+    for(var index = 0; index < data.length; index++){
+        if(data[index]['airport_arabic'] == event.target.value){
+            $("#edit-request-airport-m-line-en").val(data[index]['airport_icao']);
+        }
+    }
+}
+// mission part ...............//
 
 function edit_mission_line(data1, data2, data3) {
     var id = data1['mission_id'];
@@ -167,19 +205,21 @@ function edit_mission_line(data1, data2, data3) {
 }
 function select_request_for_mission(e, data) {
     var id = e.target.value;
-    for(index = 0; index < data.length; index++){
+    for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == id){
             $("#add-mission-aircraft-name").val(data[index]['aircraft']);
             $("#add-mission-airport-en-name").val(data[index]['airport']);
             $("#add-mission-airport-ar-name").val(data[index]['airport_ar']);
             $("#add-mission-date").prop('disabled', false);
+            return;
         }
     }
+    $("#add-mission-request-no").val("");
 }
 function select_mission_date(e, data) {
     var time = e.target.value;
     var request_id = $("#add-mission-request-no").val();
-    for(index = 0; index < data.length; index++){
+    for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == request_id){
             var from = data[index]['from'];
             var to = data[index]['to'];
@@ -192,19 +232,20 @@ function select_mission_date(e, data) {
 }
 function edit_request_for_mission(e, data) {
     var id = e.target.value;
-    for(index = 0; index < data.length; index++){
+    for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == id){
             $("#edit-mission-aircraft-name").val(data[index]['aircraft']);
             $("#edit-mission-airport-en-name").val(data[index]['airport']);
             $("#edit-mission-airport-ar-name").val(data[index]['airport_ar']);
-            // $("#edit-mission-date").prop('disabled', false);
+            return;
         }
     }
+    $("#edit-mission-request-no").val("");
 }
 function edit_mission_date(e, data) {
     var time = e.target.value;
     var request_id = $("#edit-mission-request-no").val();
-    for(index = 0; index < data.length; index++){
+    for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == request_id){
             var from = data[index]['from'];
             var to = data[index]['to'];
@@ -212,6 +253,27 @@ function edit_mission_date(e, data) {
                 $("#check_mission_date_button").click();
                 $("#edit-mission-date").val("");
             }
+        }
+    }
+}
+
+// user part ..............//
+
+function edit_user_line(data1, data2) {
+    var id = data1['id'];
+    var name = data1['name'];
+    var permission = data1['permission'];
+    for (var index = 0; index < data2.length; index++){
+        if(data2[index]['id'] == id){
+            $("#user-line" + id).css('background-color', 'lime');
+            // $("#edit-user-modal").prop('disabled', false);
+            $("#delete-user-modal").prop('disabled', false);
+            $("#delete-user-id").val(id);
+            $("#user-id-text").html("User ID : " + id);
+            $("#user-name-text").html("User Name : " + name);
+            $("#user-permission-text").html("User Permission : " + permission);
+        }else{
+            $("#user-line" + data2[index]['id']).css('background-color', 'white');
         }
     }
 }
