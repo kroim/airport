@@ -216,16 +216,20 @@ function select_request_for_mission(e, data) {
     }
     $("#add-mission-request-no").val("");
 }
-function select_mission_date(e, data) {
-    var time = e.target.value;
+function select_mission_date(data) {
+    var time = $("#add-mission-date").val();
     var request_id = $("#add-mission-request-no").val();
     for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == request_id){
             var from = data[index]['from'];
             var to = data[index]['to'];
             if(time < from || time > to){
+                $("#error-date-from").html("From : " + from);
+                $("#error-date-to").html("To : " + to);
                 $("#check_mission_date_button").click();
                 $("#add-mission-date").val("");
+            }else{
+                $("#add-mission-submit-btn").click();
             }
         }
     }
@@ -242,16 +246,20 @@ function edit_request_for_mission(e, data) {
     }
     $("#edit-mission-request-no").val("");
 }
-function edit_mission_date(e, data) {
-    var time = e.target.value;
+function edit_mission_date(data) {
+    var time = $("#edit-mission-date").val();
     var request_id = $("#edit-mission-request-no").val();
     for(var index = 0; index < data.length; index++){
         if(data[index]['request_id'] == request_id){
             var from = data[index]['from'];
             var to = data[index]['to'];
             if(time < from || time > to){
+                $("#error-date-from").html("From : " + from);
+                $("#error-date-to").html("To : " + to);
                 $("#check_mission_date_button").click();
                 $("#edit-mission-date").val("");
+            }else{
+                $("#edit-mission-submit-btn").click();
             }
         }
     }
