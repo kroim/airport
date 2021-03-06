@@ -102,4 +102,33 @@ class Main extends BaseController{
             redirect('main/request');
         }
     }
+
+    public function getReport(){
+        if($this->input->post('get-report') == 'request'){
+            $data['category'] = $this->input->post('report-category');
+            $data['title'] = $this->input->post('report-title');
+            $data['t_size'] = $this->input->post('report-title-size');
+            $data['th_size'] = $this->input->post('report-table-header-size');
+            $data['tb_size'] = $this->input->post('report-table-body-size');
+            $data['switching'] = "request";
+            $data['search_data'] = json_decode($this->input->post('search-data'));
+            $data['airport_data'] = json_decode($this->input->post('airport-data'));
+            $data['aircraft_data'] = json_decode($this->input->post('aircraft-data'));
+            $data['mission_data'] = json_decode($this->input->post('mission-data'));
+            $this->load->view('get_report', $data);
+        }elseif ($this->input->post('get-report') == 'mission'){
+            $data['category'] = $this->input->post('report-category');
+            $data['title'] = $this->input->post('report-title');
+            $data['t_size'] = $this->input->post('report-title-size');
+            $data['th_size'] = $this->input->post('report-table-header-size');
+            $data['tb_size'] = $this->input->post('report-table-body-size');
+            $data['switching'] = "mission";
+            $data['search_data'] = json_decode($this->input->post('search-data'));
+            $data['airport_data'] = json_decode($this->input->post('airport-data'));
+            $data['aircraft_data'] = json_decode($this->input->post('aircraft-data'));
+            $this->load->view('get_report', $data);
+        }else{
+            redirect('user/login');
+        }
+    }
 }

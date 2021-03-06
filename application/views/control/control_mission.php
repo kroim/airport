@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-md-3">
                                 <h4> Hours </h4>
-                                <input type="number" step="0.1" class="form-control" id="add-mission-hours" name="add-mission-hours">
+                                <input type="number" step="any" class="form-control" id="add-mission-hours" name="add-mission-hours">
                             </div>
                             <div class="col-md-3">
                                 <h4> Cycles </h4>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="col-md-3">
                                 <h4> Hours </h4>
-                                <input type="number" class="form-control" id="edit-mission-hours" name="edit-mission-hours">
+                                <input type="number" step="any" class="form-control" id="edit-mission-hours" name="edit-mission-hours">
                             </div>
                             <div class="col-md-3">
                                 <h4> Cycles </h4>

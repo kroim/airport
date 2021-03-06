@@ -84,7 +84,6 @@ class Control extends CI_Controller{
                 'purpose_ar' => $this->input->post('add-request-purpose-m-ar'),
                 'image' => $filename
             );
-//            var_dump($request);
             $this->ControlModel->addRequest($request);
         }else{
             $request = array(
@@ -96,8 +95,6 @@ class Control extends CI_Controller{
                 'purpose' => $this->input->post('add-request-purpose-m-en'),
                 'purpose_ar' => $this->input->post('add-request-purpose-m-ar')
             );
-//            var_dump($this->upload->display_errors());
-//            var_dump($request);
             $this->ControlModel->addRequest($request);
         }
         redirect('control/control_request');
@@ -124,9 +121,7 @@ class Control extends CI_Controller{
                 'purpose_ar' => $this->input->post('edit-request-purpose-m-ar'),
                 'image' => $filename
             );
-//            var_dump($request);
             $edit_res = $this->ControlModel->editRequest($id, $request);
-            var_dump($edit_res);
         }else{
             $request = array(
                 'request_id' => $this->input->post('edit-request-id-m'),
@@ -138,10 +133,7 @@ class Control extends CI_Controller{
                 'purpose' => $this->input->post('edit-request-purpose-m-en'),
                 'purpose_ar' => $this->input->post('edit-request-purpose-m-ar')
             );
-//            var_dump($this->upload->display_errors());
-//            var_dump($request);
             $edit_res = $this->ControlModel->editRequest($id, $request);
-            var_dump($edit_res);
         }
         redirect('control/control_request');
     }

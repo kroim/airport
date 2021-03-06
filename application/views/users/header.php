@@ -14,69 +14,67 @@
         /* Style the tab */
         div.tab {
             overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #5cb85c;
+            /*background-color: #5cb85c;*/
             text-align: center;
         }
 
         /* Style the buttons inside the tab */
         div.tab button {
             background-color: inherit;
+            color: black;
             border: none;
             outline: none;
             cursor: pointer;
             padding: 14px 16px;
             transition: 0.3s;
-            font-size: 17px;
+            font-size: 19px;
+            font-family: fantasy;
         }
 
         /* Change background color of buttons on hover */
         div.tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        div.tab button.active {
-            background-color: #ccc;
+            background-color: lightblue;
         }
 
     </style>
 </head>
 <body>
-<div style="background-image: url(<?php echo base_url('assets/images/header1.png'); ?>);">
-    <div class="container">
-        <div class="logo" style="text-align: center; height: 100px; padding-top: 1%;">
+<!--<div style="background-image: url(--><?php //echo base_url('assets/images/header1.png'); ?><!--); height: 150px; overflow: hidden;">-->
+<div style="background-color: #ffffff; height: 150px; overflow: hidden;">
+    <div class="row">
+        <div class="col-md-3" style="height: 150px; text-align: center; padding-left: 2%;">
             <img src="<?php echo base_url('assets/images/logo.png')?>" style="height: 100%;">
         </div>
-        <div class="row" style="text-align: right; padding-right: 1%;">
-            <div class="col-lg-11 col-sm-9"></div>
-            <div class="col-lg-1 col-sm-3">
-                <ul class="nav nav-pills">
-                    <li><a href="<?php echo site_url('user/logout') ?>" style="color: yellow; background-color: coral">Logout</a></li>
-                </ul>
+        <div class="col-md-8" style="height: 150px; position: relative;">
+            <div class="tab" style="position: absolute; bottom: 0; left: 0; right: 10%; margin: auto;">
+                <a href="<?php echo site_url('main/request') ?>"><button class="tablinks">Request List</button></a>
+                <?php
+                if($user['permission'] == 'manager'){
+                    ?>
+                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
+                    <?php
+                }elseif ($user['permission'] == 'dispatcher'){
+                    ?>
+                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
+                    <a href="<?php echo site_url('control') ?>"><button class="tablinks">Control Panel</button></a>
+                    <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal">Get Report</button></a>
+                    <a><button class="tablinks" onclick="get_request_image()">Get Request Image</button></a>
+                    <?php
+                }elseif ($user['permission'] == 'admin'){
+                    ?>
+                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
+                    <a href="<?php echo site_url('control') ?>"><button class="tablinks">Control Panel</button></a>
+                    <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal">Get Report</button></a>
+                    <a><button class="tablinks" onclick="get_request_image()">Get Request Image</button></a>
+                    <?php
+                }
+                ?>
             </div>
         </div>
-        <div class="tab">
-            <a href="<?php echo site_url('main/request') ?>"><button class="tablinks" style="color: black">Request List</button></a>
-            <?php
-            if($user['permission'] == 'manager'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <?php
-            }elseif ($user['permission'] == 'dispatcher'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
-                <?php
-            }elseif ($user['permission'] == 'admin'){
-                ?>
-                <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks" style="color: black">Mission List</button></a>
-                <a href="<?php echo site_url('control') ?>"><button class="tablinks" style="color: black">Control Panel</button></a>
-                <?php
-            }
-            ?>
-            <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal" style="color: black">Get Report</button></a>
-            <a><button class="tablinks" onclick="get_request_image()" style="color: black">Get Request Image</button></a>
+        <div class="col-md-1">
+            <ul class="nav nav-pills">
+                <li><a href="<?php echo site_url('user/logout') ?>">Logout</a></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -108,10 +106,24 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-md-4">
+                            <h4>Title Size</h4>
+                            <input type="number" id="report-title-fontsize" value="14">
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Table header Size</h4>
+                            <input type="number" id="report-table-header-fontsize" value="14">
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Table body Size</h4>
+                            <input type="number" id="report-table-body-fontsize" value="14">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-8">
-                            <h4 style="text-align: center;">Input Report Name</h4>
-                            <input class="form-control" id="select-rname" placeholder="Report Name">
+                            <h4 style="text-align: center;">Report Title</h4>
+                            <input class="form-control" id="report-title" placeholder="Report Title" required>
                         </div>
                         <div class="col-md-2"></div>
                     </div>

@@ -1,8 +1,11 @@
 
+th, tr{
+    cursor: pointer;
+}
 .main-search{
     padding-top: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
+    /*padding-left: 3%;*/
+    /*padding-right: 5%;*/
     padding-bottom: 1%;
 }
 .request-input{
