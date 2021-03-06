@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Aircraft Login </title>
+    <title> F.O.R.T.S </title>
     <link href="<?php echo base_url()?>assets/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .form-control{
@@ -30,7 +30,7 @@
             text-align: center;
         }
     </style>
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/icon1.png">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/title.png">
 </head>
 <body style="background-image: url('<?php echo base_url()?>assets/images/aircraft-02.jpg'); background-size: 100%; margin: 0;">
 <div style="padding-top: 10%; padding-left: 50%;">

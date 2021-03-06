@@ -7,7 +7,7 @@
     <link href="<?php echo base_url('assets/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/DataTables/css/dataTables.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/custom.css')?>" rel="stylesheet">
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/icon1.png">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/title.png">
 
     <style>
 
@@ -38,7 +38,7 @@
 
     </style>
 </head>
-<body>
+<body style="overflow-x: hidden">
 <!--<div style="background-image: url(--><?php //echo base_url('assets/images/header1.png'); ?><!--); height: 150px; overflow: hidden;">-->
 <div style="background-color: #ffffff; height: 150px; overflow: hidden;">
     <div class="row">

@@ -45,6 +45,7 @@ if($switching == 'request'){
             <tbody style="font-size: <?php echo $tb_size;?>px;">
             <?php
             $search_res_data = array();
+            $search_res_hours = array();
             foreach ($search_data as $requestRow){
                 array_push($search_res_data, $requestRow->aircraft);
                 ?><tr><td><?php echo $requestRow->request_id;?></td>
@@ -78,11 +79,11 @@ if($switching == 'request'){
                             $sum += floatval($mission_data[$index1]->hours);
                         }
                     }
+                    array_push($search_res_hours, $sum);
                     echo $sum;?></td></tr><?php
             }
             ?>
             </tbody>
-
         </table>
     </div>
     <div class="report-total-result" style="padding-left: 30%; padding-right: 30%;">
@@ -103,9 +104,9 @@ if($switching == 'request'){
                         ?></td><?php
                     ?><td><?php
                         $sum = 0;
-                        for ($index1 = 0; $index1 < sizeof($mission_data); $index1++){
-                            if ($mission_data[$index1]->aircraft_name == $requestRow){
-                                $sum += floatval($mission_data[$index1]->hours);
+                        for ($index1 = 0; $index1 < sizeof($search_res_data); $index1++){
+                            if ($search_res_data[$index1] == $requestRow){
+                                $sum += floatval($search_res_hours[$index1]);
                             }
                         }
                         $total_hours += $sum;
@@ -139,6 +140,7 @@ if($switching == 'request'){
         <tbody style="font-size: <?php echo $tb_size;?>px;">
         <?php
         $search_res_data1 = array();
+        $search_res_hours1 = array();
         foreach ($search_data as $missionRow){
             array_push($search_res_data1, $missionRow->aircraft_name);
             ?><tr><td><?php echo $missionRow->mission_request_no;?></td>
@@ -166,7 +168,9 @@ if($switching == 'request'){
                     }
                 }
                 ?></td>
-            <td><?php echo $missionRow->hours;?></td>
+            <td><?php
+                array_push($search_res_hours1, $missionRow->hours);
+                echo $missionRow->hours;?></td>
             <td><?php echo $missionRow->cycles;?></td></tr><?php
         }
         ?>
@@ -189,9 +193,9 @@ if($switching == 'request'){
                 }
                 ?></td><td><?php
                 $sum = 0;
-                for ($index1 = 0; $index1 < sizeof($mission_data); $index1++){
-                    if ($mission_data[$index1]->aircraft_name == $total_line){
-                        $sum += floatval($mission_data[$index1]->hours);
+                for ($index1 = 0; $index1 < sizeof($search_res_data1); $index1++){
+                    if ($search_res_data1[$index1] == $total_line){
+                        $sum += floatval($search_res_hours1[$index1]);
                     }
                 }
                 $total_hours1 += $sum;

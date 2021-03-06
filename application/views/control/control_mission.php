@@ -31,11 +31,6 @@
                             <div class="col-md-6">
                                 <h4> Request No. </h4>
                                 <input class="form-control" id="add-mission-request-no" name="add-mission-request-no" onchange='select_request_for_mission(event, <?php echo json_encode($request);?>)' required>
-<!--                                    <option label="Select"></option>-->
-<!--                                    --><?php //foreach ($request as $request_line){
-//                                        ?><!--<option value="--><?php //echo $request_line->request_id; ?><!--">--><?php //echo $request_line->request_id; ?><!--</option>--><?php
-//                                    }?>
-<!--                                </input>-->
                             </div>
                             <div class="col-md-6">
                                 <h4> Aircraft </h4>
@@ -55,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Date </h4>
-                                <input type="date" id="add-mission-date" name="add-mission-date" class="form-control" onchange='select_mission_date(event, <?php echo json_encode($request);?>)' required disabled/>
+                                <input type="date" id="add-mission-date" name="add-mission-date" class="form-control" required disabled/>
                             </div>
                             <div class="col-md-3">
                                 <h4> Hours </h4>
@@ -84,7 +79,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info" name="add-request-button"> Add </button>
+                        <button type="submit" class="btn btn-info" id="add-mission-submit-btn" name="add-mission-button" style="display: none;"> Add </button>
+                        <button type="button" class="btn btn-info" onclick='select_mission_date(<?php echo json_encode($request);?>)'> Add </button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -108,11 +104,6 @@
                                 <h4> Request No. </h4>
                                 <input id="edit-mission-id" name="edit-mission-id" style="display: none;">
                                 <input class="form-control" id="edit-mission-request-no" name="edit-mission-request-no" onchange='edit_request_for_mission(event, <?php echo json_encode($request);?>)' required>
-<!--                                    <option label="Select"></option>-->
-<!--                                    --><?php //foreach ($request as $request_line){
-//                                        ?><!--<option value="--><?php //echo $request_line->request_id; ?><!--">--><?php //echo $request_line->request_id; ?><!--</option>--><?php
-//                                    }?>
-<!--                                </input>-->
                             </div>
                             <div class="col-md-6">
                                 <h4> Aircraft </h4>
@@ -132,7 +123,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h4> Date </h4>
-                                <input type="date" id="edit-mission-date" name="edit-mission-date" class="form-control" onchange='edit_mission_date(event, <?php echo json_encode($request);?>)' required />
+                                <input type="date" id="edit-mission-date" name="edit-mission-date" class="form-control" required />
                             </div>
                             <div class="col-md-3">
                                 <h4> Hours </h4>
@@ -161,7 +152,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info" name="edit-request-button"> Edit </button>
+                        <button type="submit" class="btn btn-info" id="edit-mission-submit-btn" name="edit-request-button" style="display: none;"> Edit </button>
+                        <button type="submit" class="btn btn-info" onclick='edit_mission_date(<?php echo json_encode($request);?>)'> Edit </button>
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -206,7 +198,10 @@
                     <h4 class="modal-title" style="color: white;"> Error For Date Interval </h4>
                 </div>
                 <div class="modal-body">
-                    <p>You have to choose valid date from request.</p>
+                    <h3>You have to choose valid date from request.</h3>
+                    <h4 style="color: red;">Valid Period Date</h4>
+                    <h4 id="error-date-from">From : mm/dd/yyyy</h4>
+                    <h4 id="error-date-to">To : mm/dd/yyyy</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

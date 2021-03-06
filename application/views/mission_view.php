@@ -1,5 +1,5 @@
 
-<div class="main-search" style="background: rgb(0,0,0); overflow: hidden">
+<div class="main-search" style="background: rgb(0,0,0); ">
     <div class="row">
         <div class="col-md-10" style="padding-left: 5%">
             <form method="post" action="<?php echo site_url('main/mission')?>">
