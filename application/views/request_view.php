@@ -43,7 +43,7 @@
         <tr>
             <th onclick="sortTable01(0)">Request No.</th>
             <th onclick="sortTable01(1)">Aircraft</th>
-            <th onclick="sortTable01(2)">date From</th>
+            <th id="refresh-request-click1" onclick="sortTable01(2)">date From</th>
             <th onclick="sortTable01(3)">date To</th>
             <th onclick="sortTable01(4)">Airport</th>
             <th onclick="sortTable01(5)">Airport Ar</th>

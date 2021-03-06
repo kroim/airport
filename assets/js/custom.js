@@ -494,3 +494,7 @@ function sortTable03(n) {
         }
     }
 }
+$("#refresh-request-click1").click();
+$("#refresh-request-click1").click();
+$("#refresh-mission-click1").click();
+$("#refresh-mission-click1").click();

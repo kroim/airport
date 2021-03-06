@@ -80,6 +80,7 @@ class Main extends BaseController{
         $data['aircraftData'] = $this->MainModel->getAircraftAll();
         $data['title'] = "Mission List";
         $data['airportData'] = $this->ControlModel->getAirportAll();
+        $data['missionData'] = $this->MainModel->getMissionAll();
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             //load the view
@@ -126,6 +127,7 @@ class Main extends BaseController{
             $data['search_data'] = json_decode($this->input->post('search-data'));
             $data['airport_data'] = json_decode($this->input->post('airport-data'));
             $data['aircraft_data'] = json_decode($this->input->post('aircraft-data'));
+            $data['mission_data'] = json_decode($this->input->post('mission-data'));
             $this->load->view('get_report', $data);
         }else{
             redirect('user/login');

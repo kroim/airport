@@ -48,7 +48,7 @@
         <thead>
         <tr>
             <th class="col-md-1" onclick="sortTable02(0)">ACFT</th>
-            <th class="col-md-1" onclick="sortTable02(1)">Date</th>
+            <th class="col-md-1" id="refresh-mission-click1" onclick="sortTable02(1)">Date</th>
             <th class="col-md-1" onclick="sortTable02(2)">Flying Hours</th>
             <th class="col-md-1" onclick="sortTable02(3)">Cycles</th>
             <th class="col-md-1" onclick="sortTable02(4)">Request No.</th>
@@ -88,6 +88,7 @@
         <input type="text" name="search-data" value='<?php echo json_encode($searchData); ?>'>
         <input type="text" name="airport-data" value='<?php echo json_encode($airportData); ?>'>
         <input type="text" name="aircraft-data" value='<?php echo json_encode($aircraftData); ?>'>
+        <input type="text" name="mission-data" value='<?php echo json_encode($missionData); ?>'>
         <input type="text" name="report-category" id="mission-report-category">
         <input type="text" name="report-title" id="mission-report-title">
         <input type="text" name="report-title-size" id="mission-report-title-size">
