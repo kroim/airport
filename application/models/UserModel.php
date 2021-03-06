@@ -62,15 +62,8 @@ class UserModel extends CI_Model{
             return false;
         }
     }
-    public function get_users(){
-        $this->db->select('*');
-        $this->db->from($this->userTable);
-        $query = $this->db->get();
-        $result = $query->result();
-        return $result;
-    }
-    public function delete_user($id){
-        $this->db->where('id', $id);
-        $this->db->delete('users');
+    public function updateRow($data = array()){
+        $this->db->where('id', $data['id']);
+        $this->db->update('users', $data);
     }
 }

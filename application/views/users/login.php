@@ -10,63 +10,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> F.O.R.T.S </title>
-    <link href="<?php echo base_url()?>assets/bootstrap/dist/css/bootstrap.min.css">
-    <style>
-        .form-control{
-            height: 30px;
-            width: 180px;
-            border-radius: 3px;
-            border-style: solid;
-            border-width: 2px;
-            border-color: gray;
-        }
-        form{
-            padding-left: 10px;
-            text-align: center;
-            font-size: 20px;
-        }
-        p{
-            text-align: center;
-        }
-    </style>
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/title.png">
+    <title> Aircraft Login </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="icon" href="<?php echo base_url('assets/images/icon1.png'); ?>">
 </head>
-<body style="background-image: url('<?php echo base_url()?>assets/images/aircraft-02.jpg'); background-size: 100%; margin: 0;">
-<div style="padding-top: 10%; padding-left: 50%;">
-    <div style=" width: 500px; height: 450px; background-color: darkblue;">
-        <div style="width: 100%; padding-bottom: 7%">
-            <img src="<?php echo base_url('assets/images/logo.png')?>" style="width: 100%">
-        </div>
-        <?php
-        if(!empty($success_msg)){
-            echo '<p class="statusMsg" style="color: #000000; margin-top: 0">' .$success_msg.'</p>';
-        }elseif(!empty($error_msg)){
-            echo '<p class="statusMsg" style="color: red; margin-top: 0">'.$error_msg.'</p>';
-        }
-        ?>
-<!--        <p style="text-align: center; font-size: 30px; color: #dd7c00; padding-top: 8%;"> Aircraft </p>-->
-        <div style="width: 50%; padding-left: 25%">
-            <form action="" method="post" style="color: yellow;">
-                User Name
-                <input type="text" style="font-size: 20px;" id="user-name" class="form-control" name="user-name" required>
-                <br>
-                Password
-                <input type="password" style="font-size: 20px;" id="user-password" class="form-control" name="user-password" required>
-                <br>
-                <input type="submit" class="form-control" name="loginSubmit" id="login-button" value="Login" style="width: 100px;margin-top: 30px;">
-            </form>
-        </div>
-        <div style="text-align: center; background-color: white;">
-            <div style="margin-top: -5px; padding-top: ;">
-                <h4 style="color: darkblue; padding-top: 10px;">Feras A Abduldaim</h4>
-                <h4 style="color: darkblue">Abduldaim.FA@sgs.org.sa</h4>
-                <h4 style="color: darkblue; padding-bottom: 10px;">0545969295</h4>
-            </div>
-        </div>
-<!--        <p class="footInfo">Don't have an account? <a href="--><?php //echo site_url("user/register"); ?><!--">Register here</a></p>-->
+<body style="background-image: url('<?php echo base_url("assets/images/aircraft-01.png")?>'); width: 100%; height: 100%; margin: 0;">
+<div style="padding-top: 12%; margin: 0;">
+    <div class="col-lg-7 col-md-7 col-xs-2"></div>
+    <div class="col-lg-2 col-md-2 col-xs-8" style="background-color: #00ff1f70; padding: 2% 2%">
+        <h2 style="text-align: center; color: orange;"><?php echo $this->lang->line('aircraft');?></h2>
+        <form action="" method="post">
+            <?php echo $this->lang->line('user_email');?>
+            <input type="email" style="font-size: 20px;" id="user-email" class="form-control" name="user-email" required>
+            <br>
+            <?php echo $this->lang->line('password');?>
+            <input type="password" style="font-size: 20px;" id="user-password" class="form-control" name="user-password" required>
+            <br>
+            <input type="submit" class="btn btn-default" name="loginSubmit" id="login-button" value="<?php echo $this->lang->line('login');?>">
+            <?php
+            if(!empty($success_msg)){
+                echo '<p class="statusMsg">'.$success_msg.'</p>';
+            }elseif(!empty($error_msg)){
+                echo '<p class="statusMsg" style="color: red; margin-top: 3px;">'.$error_msg.'</p>';
+            }
+            ?>
+        </form>
+        <p class="footInfo" style="margin: 0;"><?php echo $this->lang->line('account_check_msg2')?></p>
+        <p style="margin: 0;">
+            <a href="<?php echo site_url("user/register"); ?>" style="color: blue"><?php echo $this->lang->line('register')." ".$this->lang->line('here')?></a></p>
     </div>
 </div>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

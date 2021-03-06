@@ -21,116 +21,133 @@ class Main extends BaseController{
         $this->load->helper(array('form', 'url'));
         $this->load->model('UserModel');
         $this->load->model('MainModel');
-        $this->load->model('ControlModel');
     }
     public function index(){
+
         $data = array();
-        if($this->session->userdata('isUserLoggedIn')){
-            $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
-            //load the view
-            redirect('main/request');
-        }else{
-            redirect('user/login');
-        }
-    }
-    public function request(){
-        $data = array();
-        if($this->input->post()){
-            $searchData = $this->input->post();
-            $id = $searchData['request-no'];
-            $aircraft = array();
-            if(isset($searchData['request-aircraft'])){
-                $aircraft = $searchData['request-aircraft'];
-            }
-            $from = $searchData['request-from'];
-            $to = $searchData['request-to'];
-            $data['searchData'] = $this->MainModel->getRequest($id, $aircraft, $from, $to);
-        }else{
-            $data['searchData'] = $this->MainModel->getRequestAll();
-        }
-        $data['aircraftData'] = $this->MainModel->getAircraftAll();
-        $data['title'] = "Request List";
-        $data['airportData'] = $this->ControlModel->getAirportAll();
-        $data['missionData'] = $this->MainModel->getMissionAll();
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             //load the view
             $this->load->view('users/header', $data);
-            $this->load->view('request_view', $data);
+            $this->load->view('main_view', $data);
             $this->load->view('users/footer');
-        }else{
-            redirect('User/login');
-        }
-    }
-    public function mission(){
-        $data = array();
-        if($this->input->post()){
-            $searchData = $this->input->post();
-            $id = $searchData['mission-no'];
-            $aircraft = array();
-            if(isset($searchData['mission-aircraft'])){
-                $aircraft = $searchData['mission-aircraft'];
-            }
-            $from = $searchData['mission-from'];
-            $to = $searchData['mission-to'];
-            $data['searchData'] = $this->MainModel->getMission($id, $aircraft, $from, $to);
-        }else{
-            $data['searchData'] = $this->MainModel->getMissionAll();
-        }
-        $data['aircraftData'] = $this->MainModel->getAircraftAll();
-        $data['title'] = "Mission List";
-        $data['airportData'] = $this->ControlModel->getAirportAll();
-        $data['missionData'] = $this->MainModel->getMissionAll();
-        if($this->session->userdata('isUserLoggedIn')){
-            $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
-            //load the view
-            $this->load->view('users/header', $data);
-            $this->load->view('mission_view', $data);
-            $this->load->view('users/footer');
-        }else{
-            redirect('User/login');
-        }
-    }
-
-    public function download_image(){
-        $this->load->helper('download'); //load helper
-        if($this->input->post('request_image_data') != ""){
-            $filepath = $this->input->post('request_image_data');
-            $filename = $this->input->post('request_image_filename');
-            $file_data = file_get_contents($filepath);
-            force_download($filename.".png", $file_data);
-        }else{
-            redirect('main/request');
-        }
-    }
-
-    public function getReport(){
-        if($this->input->post('get-report') == 'request'){
-            $data['category'] = $this->input->post('report-category');
-            $data['title'] = $this->input->post('report-title');
-            $data['t_size'] = $this->input->post('report-title-size');
-            $data['th_size'] = $this->input->post('report-table-header-size');
-            $data['tb_size'] = $this->input->post('report-table-body-size');
-            $data['switching'] = "request";
-            $data['search_data'] = json_decode($this->input->post('search-data'));
-            $data['airport_data'] = json_decode($this->input->post('airport-data'));
-            $data['aircraft_data'] = json_decode($this->input->post('aircraft-data'));
-            $data['mission_data'] = json_decode($this->input->post('mission-data'));
-            $this->load->view('get_report', $data);
-        }elseif ($this->input->post('get-report') == 'mission'){
-            $data['category'] = $this->input->post('report-category');
-            $data['title'] = $this->input->post('report-title');
-            $data['t_size'] = $this->input->post('report-title-size');
-            $data['th_size'] = $this->input->post('report-table-header-size');
-            $data['tb_size'] = $this->input->post('report-table-body-size');
-            $data['switching'] = "mission";
-            $data['search_data'] = json_decode($this->input->post('search-data'));
-            $data['airport_data'] = json_decode($this->input->post('airport-data'));
-            $data['aircraft_data'] = json_decode($this->input->post('aircraft-data'));
-            $data['mission_data'] = json_decode($this->input->post('mission-data'));
-            $this->load->view('get_report', $data);
         }else{
             redirect('user/login');
+        }
+    }
+    // Category Names
+    public function addCategoryName(){
+        if($this->session->userdata('isUserLoggedIn')){
+            if($this->input->post('m_category_submit')){
+                $category = array(
+                    'name' => $this->input->post('m_category_name'),
+                    'critical' => $this->input->post('m_critical'),
+                    'enabled' => $this->input->post('m_enabled'),
+                    'ref_num_name' => $this->input->post('m_ref_num_name'),
+                    'desc_name' => $this->input->post('m_desc_name'),
+                    'due_on_name' => $this->input->post('m_due_on_name')
+                );
+                $this->MainModel->addCategory($category);
+                redirect('main');
+            }else{
+                redirect('main');
+            }
+        }else{
+            redirect('user/login');
+        }
+    }
+    // View Categories
+    public function viewAllCategory(){
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
+            if ($data['user']['permission'] == 'admin'){
+                $data['all_categories'] = $this->MainModel->getAllCategories();
+                //load the view
+                $this->load->view('users/header', $data);
+                $this->load->view('admin/categories', $data);
+                $this->load->view('users/footer');
+            }
+        }else{
+            redirect('main');
+        }
+    }
+    // Edit Category
+    public function editCategoryName(){
+        if($this->input->post()){
+            $category = array(
+                'id' => $this->input->post('m_category_id'),
+                'name' => $this->input->post('m_category_name'),
+                'critical' => $this->input->post('m_critical'),
+                'enabled' => $this->input->post('m_enabled'),
+                'ref_num_name' => $this->input->post('m_ref_num_name'),
+                'desc_name' => $this->input->post('m_desc_name'),
+                'due_on_name' => $this->input->post('m_due_on_name')
+            );
+            $this->MainModel->editCategory($category);
+            redirect('main/viewAllCategory');
+        }else{
+            redirect('main');
+        }
+    }
+    // Delete Category
+    public function deleteCategoryName(){
+        if($this->input->post()){
+            $id =  $this->input->post('dm_category_id');
+            var_dump($id);
+            $this->MainModel->deleteCategory($id);
+            redirect('main/viewAllCategory');
+        }else{
+            redirect('main');
+        }
+    }
+
+    // My Account
+    public function myAccount(){
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
+            if ($data['user']['permission'] == 'admin'){
+                //load the view
+                $this->load->view('users/header', $data);
+                $this->load->view('admin/myaccount', $data);
+                $this->load->view('users/footer');
+            }
+        }else{
+            redirect('main');
+        }
+    }
+    // My Account
+    public function saveMyProfile(){
+
+        $data = array();
+        if($this->session->userdata('isUserLoggedIn')){
+            $accountType = $this->input->post('accountType');
+            if($accountType == '1'){
+                $accountName = $this->input->post('name');
+                $contact = $this->input->post('contact');
+                $selCountry = $this->input->post('countrySelection');
+                $isPasswordChange = $this->input->post('changePasswordCheck');
+                $data['name'] = $accountName;
+                $data['contact'] = $contact;
+                $data['country'] = intval($selCountry);
+                $data['address'] = $this->input->post('address');
+                $data['id'] = $this->session->userdata('userID');
+                $this->UserModel->updateRow($data);
+                redirect('main/myAccount');
+            } else {
+                $data['header'] = $this->input->post('customHeaderText');
+                $data['footer'] = $this->input->post('customFooterText');
+                $data['notifyat'] = $this->input->post('notifyAt');
+                $data['timezone'] = $this->input->post('timezoneSelection');
+                $data['notifygroup'] = $this->input->post('alertDocGroupBySelection');
+                $data['id'] = $this->session->userdata('userID');
+                $this->UserModel->updateRow($data);
+                redirect('main/myAccount');
+            }
+
+        }else{
+            redirect('main');
         }
     }
 }

@@ -1,139 +1,210 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php
-        echo $title;
-        ?></title>
-    <link href="<?php echo base_url('assets/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/DataTables/css/dataTables.bootstrap.min.css')?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/css/custom.css')?>" rel="stylesheet">
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/title.png">
+    <title>title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
 
+    <link rel="stylesheet" href="<?php echo base_url('assets/back/css/style.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/back/css/colors/main.css'); ?>" id="colors">
+
+    <link rel="stylesheet" href="<?php echo base_url('assets/back/calendar/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/back/calendar/fullcalendar.min.css'); ?>">
+
+
+    <script type="text/javascript" src="<?php echo base_url('assets/back/scripts/jquery-2.2.0.min.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/table/js/jquery-2.1.4.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/back/calendar/bootstrap.min.js')?>"></script>
+
+    <link rel="icon" href="<?php echo base_url('assets/images/icon1.png'); ?>">
     <style>
-
-        /* Style the tab */
-        div.tab {
-            overflow: hidden;
-            /*background-color: #5cb85c;*/
-            text-align: center;
+        .modal-dialog{
+            margin: 200px auto;
         }
-
-        /* Style the buttons inside the tab */
-        div.tab button {
-            background-color: inherit;
-            color: black;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 19px;
-            font-family: fantasy;
+        a{
+            text-decoration: none !important;
         }
-
-        /* Change background color of buttons on hover */
-        div.tab button:hover {
-            background-color: lightblue;
+        /* For Firefox */
+        input[type='number'] {
+            -moz-appearance:textfield;
         }
-
+        /* Webkit browsers like Safari and Chrome */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
-<body style="overflow-x: hidden">
-<!--<div style="background-image: url(--><?php //echo base_url('assets/images/header1.png'); ?><!--); height: 150px; overflow: hidden;">-->
-<div style="background-color: #ffffff; height: 150px; overflow: hidden;">
-    <div class="row">
-        <div class="col-md-3" style="height: 150px; text-align: center; padding-left: 2%;">
-            <img src="<?php echo base_url('assets/images/logo.png')?>" style="height: 100%;">
-        </div>
-        <div class="col-md-8" style="height: 150px; position: relative;">
-            <div class="tab" style="position: absolute; bottom: 0; left: 0; right: 10%; margin: auto;">
-                <a href="<?php echo site_url('main/request') ?>"><button class="tablinks">Request List</button></a>
-                <?php
-                if($user['permission'] == 'manager'){
-                    ?>
-                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
-                    <?php
-                }elseif ($user['permission'] == 'dispatcher'){
-                    ?>
-                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
-                    <a href="<?php echo site_url('control') ?>"><button class="tablinks">Control Panel</button></a>
-                    <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal">Get Report</button></a>
-                    <a><button class="tablinks" onclick="get_request_image()">Get Request Image</button></a>
-                    <?php
-                }elseif ($user['permission'] == 'admin'){
-                    ?>
-                    <a href="<?php echo site_url('main/mission') ?>"><button class="tablinks">Mission List</button></a>
-                    <a href="<?php echo site_url('control') ?>"><button class="tablinks">Control Panel</button></a>
-                    <a href="#"><button class="tablinks" data-toggle="modal" data-target="#select-table-modal">Get Report</button></a>
-                    <a><button class="tablinks" onclick="get_request_image()">Get Request Image</button></a>
-                    <?php
-                }
-                ?>
-            </div>
-        </div>
-        <div class="col-md-1">
-            <ul class="nav nav-pills">
-                <li><a href="<?php echo site_url('user/logout') ?>">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<body>
 
-<div class="modal fade" id="select-table-modal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #d5d6d5">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title" style="font-family: 'Times New Roman'">Select Report Format</h3>
-            </div>
-            <form>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Request / Mission</h4>
-                            <select class="form-control" id="select-re-mi">
-                                <option value="re">Request</option>
-                                <option value="mi">Mission</option>
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fixed fullwidth dashboard">
+
+        <!-- Header -->
+        <div id="header" class="not-sticky">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="<?php echo site_url('main');?>"><img src="<?php echo base_url('assets/images/logo.png')?>" alt=""></a>
+                        <a href="<?php echo site_url('main');?>" class="dashboard-logo"><img src="<?php echo base_url('assets/images/logo.png')?>" alt=""></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <!-- Main Navigation -->
+                    <!-- Main Navigation / End -->
+                </div>
+                <!-- Left Side Content / End -->
+
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+                    <!-- Header Widget -->
+                    <div class="header-widget">
+                        <div class="user-menu">
+                            <select onchange="javascript:window.location.href='<?php echo base_url(); ?>LanguageSwitcher/switchLang/'+this.value;"
+                            style="padding: 0 5px; height: 30px;">
+                                <option value="english" <?php if($this->session->userdata('site_lang') == 'english') echo 'selected="selected"'; ?>>English</option>
+                                <option value="arabic" <?php if($this->session->userdata('site_lang') == 'arabic') echo 'selected="selected"'; ?>>Arabic</option>
                             </select>
                         </div>
-                        <div class="col-md-6">
-                            <h4>English / Arabic</h4>
-                            <select class="form-control" id="select-lang">
-                                <option value="en">English</option>
-                                <option value="ar">Arabic</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h4>Title Size</h4>
-                            <input type="number" id="report-title-fontsize" value="14">
-                        </div>
-                        <div class="col-md-4">
-                            <h4>Table header Size</h4>
-                            <input type="number" id="report-table-header-fontsize" value="14">
-                        </div>
-                        <div class="col-md-4">
-                            <h4>Table body Size</h4>
-                            <input type="number" id="report-table-body-fontsize" value="14">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
-                            <h4 style="text-align: center;">Report Title</h4>
-                            <input class="form-control" id="report-title" placeholder="Report Title" required>
-                        </div>
-                        <div class="col-md-2"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" onclick="select_report_format()"> Get Report </button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
 
-    </div>
-</div>
+                        <!-- User Menu -->
+                        <div class="user-menu">
+                            <div class="user-name"><?php echo $user['name'];?></div>
+                        </div>
+
+                        <a href="<?php echo site_url('user/logout') ?>" class="button"><?php echo $this->lang->line('logout');?></a>
+                    </div>
+                    <!-- Header Widget / End -->
+                </div>
+                <!-- Right Side Content / End -->
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+    <!-- Dashboard -->
+    <div id="dashboard">
+
+        <!-- Navigation
+        ================================================== -->
+
+        <!-- Responsive Navigation Trigger -->
+        <a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> <?php echo $this->lang->line('side_dashboard')." ".$this->lang->line('side_navigation');?></a>
+
+        <div class="dashboard-nav">
+            <div class="dashboard-nav-inner">
+
+                <ul data-submenu-title="<?php echo $this->lang->line('side_main');?>">
+                    <li><a href="<?php echo site_url('main');?>"><i class="sl sl-icon-home"></i> <?php echo $this->lang->line('side_dashboard');?></a></li>
+                </ul>
+
+                <ul data-submenu-title="<?php echo $this->lang->line('side_categories');?>">
+                    <?php if ($user['permission'] == 'admin'){?>
+                        <li><a href="#" data-toggle="modal" data-target="#select-table-modal">
+                                <i class="sl sl-icon-plus"></i> <?php echo $this->lang->line('add')." ".$this->lang->line('side_categories');?>
+                            </a></li>
+                        <li><a href="<?php echo site_url('main/viewAllCategory')?>">
+                                <i class="sl sl-icon-notebook"></i> <?php echo $this->lang->line('view')." ".$this->lang->line('side_categories');?>
+                            </a></li>
+                    <?php }?>
+                    <?php if ($user['permission'] == 'manager'){?>
+                        <li><a href="#"> Reviews</a></li>
+                        <li><a href="#"> Bookmarks</a></li>
+                    <?php }?>
+                </ul>
+
+                <ul data-submenu-title="<?php echo $this->lang->line('side_settings');?>">
+                    <?php if ($user['permission'] == 'admin'){?>
+                        <li>
+                            <a href="#"><i class="sl sl-icon-settings">
+                                </i> <?php echo $this->lang->line('side_general');?></a></li>
+                    <?php }?>
+                    <li><a href="<?php echo site_url('main/myAccount');?>"><i class="sl sl-icon-user"></i> <?php echo $this->lang->line('side_my_account');?></a></li>
+                    <?php if ($user['permission'] == 'admin'){?>
+                        <li>
+                            <a href="#"><i class="sl sl-icon-list">
+                                </i> <?php echo $this->lang->line('side_audit');?></a></li>
+                    <?php }?>
+                    <li><a href="<?php echo site_url('user/logout') ?>"><i class="sl sl-icon-power"></i> <?php echo $this->lang->line('logout');?></a></li>
+                </ul>
+
+            </div>
+        </div>
+        <!-- Navigation / End -->
+
+
+        <div class="modal fade" id="select-table-modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgba(42,30,214,0.22); border-bottom-color: blue;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title" style="font-family: 'Times New Roman'"><?php echo $this->lang->line('modal_title');?></h3>
+                    </div>
+                    <form method="post" action="<?php echo site_url('main/addCategoryName') ?>">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4><?php echo $this->lang->line('modal_category_name');?></h4>
+                                    <input class="form-control" name="m_category_name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+<!--                                <div class="col-md-6 col-xs-12">-->
+<!--                                    <h4>--><?php //echo $this->lang->line('modal_due');?><!--</h4>-->
+<!--                                    <input type="number" class="form-control" name="m_due">-->
+<!--                                </div>-->
+                                <div class="col-md-6">
+                                    <h4><?php echo $this->lang->line('modal_critical');?></h4>
+                                    <input type="number" class="form-control" name="m_critical" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4><?php echo $this->lang->line('modal_due_name');?></h4>
+                                    <input type="text" class="form-control" name="m_due_on_name" value="Due on" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4><?php echo $this->lang->line('modal_ref_name');?></h4>
+                                    <input type="text" class="form-control" name="m_ref_num_name" value="Reference number" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4><?php echo $this->lang->line('modal_desc_name');?></h4>
+                                    <input type="text" class="form-control" name="m_desc_name" value="Description" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4><?php echo $this->lang->line('modal_enabled');?></h4>
+                                    <input type="radio" name="m_enabled" value="yes" style="display: inline-block"> <?php echo $this->lang->line('modal_yes');?>
+                                    &nbsp;&nbsp;
+                                    <input type="radio" name="m_enabled" value="no" style="display: inline-block" checked><?php echo $this->lang->line('modal_no');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" name="m_category_submit" value="m_category_submit"><?php echo $this->lang->line('modal_save');?></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_close');?></button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>

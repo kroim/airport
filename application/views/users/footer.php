@@ -1,16 +1,45 @@
-<div style="height: 80px;"></div>
-<div class="footer" style="text-align: center;">
-    <div>
-        <h4>Feras A Abduldaim</h4>
-        <h4>Abduldaim.FA@sgs.org.sa</h4>
-        <h4>0545969295</h4>
-    </div>
+
+
 </div>
-<script src="<?php echo base_url('assets/js/jquery/jquery-2.2.3.min.js')?>"></script>
-<script src="<?php echo base_url('assets/js/custom.js')?>"></script>
-<script src="<?php echo base_url('assets/js/calculator.js')?>"></script>
-<script src="<?php echo base_url('assets/bootstrap/dist/js/bootstrap.min.js')?>"></script>
-<script src="<?php echo base_url('assets/DataTables/js/jquery.dataTables.min.js')?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.table2excel.js')?>"></script>
+<!-- Dashboard / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/jpanelmenu.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/chosen.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/slick.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/rangeslider.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/magnific-popup.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/waypoints.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/counterup.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/jquery-ui.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/tooltips.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/back/scripts/custom.js')?>"></script>
+<!-- page specific plugin scripts -->
+
+
+
+<script src="<?php echo base_url('assets/back/calendar/moment.min.js')?>"></script>
+<script src="<?php echo base_url('assets/back/calendar/fullcalendar.min.js')?>"></script>
+<script src="<?php echo base_url('assets/back/calendar/bootbox.js')?>"></script>
+
+<!--<!-- page specific plugin scripts -->-->
+<!--<script src="--><?php //echo base_url('assets/table/js/jquery.dataTables.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/jquery.dataTables.bootstrap.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/dataTables.buttons.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/buttons.flash.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/buttons.html5.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/buttons.print.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/buttons.colVis.min.js')?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('assets/table/js/dataTables.select.min.js')?><!--"></script>-->
+
+<script src="<?php echo base_url('assets/js/myscript.js')?>"></script>
+
 </body>
 </html>

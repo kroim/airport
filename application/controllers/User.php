@@ -39,14 +39,14 @@ class User extends CI_Controller {
         }
         if($this->input->post('loginSubmit')){
 
-            $this->form_validation->set_rules('user-name', 'user-name', 'required');
+            $this->form_validation->set_rules('user-email', 'user-email', 'required');
             $this->form_validation->set_rules('user-password', 'user-password', 'required');
 
             if($this->form_validation->run() == true){
 
                 $con['returnType'] = 'single';
                 $con['conditions'] = array(
-                    'name'=>$this->input->post('user-name'),
+                    'email'=>$this->input->post('user-email'),
                     'password'=>$this->input->post('user-password'),
                 );
                 $checkLogin = $this->UserModel->getRows($con);
@@ -71,12 +71,14 @@ class User extends CI_Controller {
         $data = array();
         $userData = array();
         if($this->input->post('registerSubmit')){
-            $this->form_validation->set_rules('name', 'name', 'required|callback_name_check');
+            $this->form_validation->set_rules('name', 'name', 'required');
+            $this->form_validation->set_rules('email', 'email', 'required|callback_email_check');
             $this->form_validation->set_rules('password', 'password', 'required');
             $this->form_validation->set_rules('conf_password', 'confirm password', 'required|matches[password]');
 
             $userData = array(
                 'name' => strip_tags($this->input->post('name')),
+                'email' => strip_tags($this->input->post('email')),
                 'password' => strip_tags($this->input->post('password')),
                 'permission' => strip_tags($this->input->post('permission'))
             );
@@ -84,24 +86,14 @@ class User extends CI_Controller {
                 $insert = $this->UserModel->insert($userData);
                 if($insert){
                     $this->session->set_userdata('success_msg', 'Register Success!');
-                    redirect('user/get_users');
+                    redirect('user/login');
                 }else{
                     $data['error_msg'] = 'Register Failed';
                 }
             }
         }
-        $data['userData'] = $userData;
-        $userInfo = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
-        $data['user'] = $userInfo;
-        $data['title'] = "User Management";
-        if ($userInfo['permission'] == 'admin'){
-            $data['user_data'] = $this->UserModel->get_users();
-            $this->load->view('control/control_header', $data);
-            $this->load->view('users/add_user', $data);
-            $this->load->view('users/footer');
-        }else{
-            redirect('user/login');
-        }
+        $data['user'] = $userData;
+        $this->load->view('users/register', $data);
     }
     /*
      * User logout
@@ -110,7 +102,7 @@ class User extends CI_Controller {
         $this->session->unset_userdata('isUserLoggedIn');
         $this->session->unset_userdata('userID');
         $this->session->unset_userdata('permission');
-        $this->session->sess_destroy();
+        //$this->session->sess_destroy();
         redirect('user/login');
     }
     /*
@@ -127,27 +119,15 @@ class User extends CI_Controller {
             return true;
         }
     }
-
-    function get_users(){
-        $userInfo = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
-        $data['user'] = $userInfo;
-        $data['title'] = "User Management";
-        if ($userInfo['permission'] == 'admin'){
-            $data['user_data'] = $this->UserModel->get_users();
-            $this->load->view('control/control_header', $data);
-            $this->load->view('control/control_user', $data);
-            $this->load->view('users/footer');
+    public function email_check($str){
+        $con['returnType'] = 'count';
+        $con['conditions'] = array('email'=>$str);
+        $checkName = $this->UserModel->getRows($con);
+        if ($checkName > 0){
+            $this->form_validation->set_message('email_check', 'This Email already exists!');
+            return false;
         }else{
-            redirect('user/login');
-        }
-    }
-    function delete_user(){
-        if ($this->input->post()){
-            $id = $this->input->post('delete-user-id');
-            $this->UserModel->delete_user($id);
-            redirect('user/get_users');
-        }else{
-            redirect('user/get_users');
+            return true;
         }
     }
 }
