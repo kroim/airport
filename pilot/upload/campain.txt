@@ -1,0 +1,64 @@
+http://192.168.2.3/test/checkout/order-received/27/?key=wc_order_5aa0605162d3b
+
+{
+    "info": {
+        "code": "INFO_CAMPAIGN_CREATED",
+        "name": "Campaign Created",
+        "message": "Campaign creation has begun."
+    },
+    "status": 200,
+    "campaign": {
+        "message": null,
+        "subject": null,
+        "contacts": [
+            {
+                "email": "longhongwang@gmail.com",
+                "firstname": "wang",
+                "added_succesfully": true,
+                "lastname": "longhong",
+                "message": "Existing contact"
+            }
+        ],
+        "status": "API_CREATING",
+        "uuid": "dbb5c022c2c24d548dce6c1ba3a03bd8",
+        "suppress_default_greeting": false,
+        "delivery_type": "GIFTBIT_EMAIL",
+        "price_in_cents": 5000,
+        "brand_codes": [
+            "itunesus",
+            "amazonus"
+        ],
+        "expiry": "2018-11-01",
+        "contacts_success_count": 1,
+        "contacts_failure_count": 0,
+        "fees": {
+            "cost_entries": [
+                {
+                    "percentage": 0,
+                    "fee_type": "PREFUND_GIFT_COST",
+                    "amount_in_cents": 5000,
+                    "currency": "USD",
+                    "tax_type": "NOTAX",
+                    "tax_in_cents": 0,
+                    "number_of_gifts": 1,
+                    "fee_per_gift_in_cents": 5000
+                },
+                {
+                    "percentage": 50,
+                    "fee_type": "BREAKAGE_PERCENTAGE",
+                    "amount_in_cents": 0,
+                    "currency": "USD",
+                    "tax_type": "NOTAX",
+                    "tax_in_cents": 0,
+                    "number_of_gifts": 1,
+                    "fee_per_gift_in_cents": 0
+                }
+            ],
+            "subtotal_in_cents": 5000,
+            "tax_in_cents": 0,
+            "tax_type": "NOTAX",
+            "total_in_cents": 5000
+        },
+        "gift_template": "JFOXU"
+    }
+}
