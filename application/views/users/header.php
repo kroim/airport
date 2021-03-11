@@ -124,22 +124,24 @@
                                 <i class="sl sl-icon-notebook"></i> <?php echo $this->lang->line('view')." ".$this->lang->line('side_categories');?>
                             </a></li>
                     <?php }?>
-                    <?php if ($user['permission'] == 'manager'){?>
-                        <li><a href="#"> Reviews</a></li>
-                        <li><a href="#"> Bookmarks</a></li>
+                    <?php if ($user['permission'] == 'manager'){
+                        foreach ($user_categories as $user_category) {?>
+                            <li><a href="<?php echo site_url('main/category/'.$user_category->id); ?>"> <?php echo $user_category->name;?></a></li>
+                        <?php }
+                        ?>
                     <?php }?>
                 </ul>
 
                 <ul data-submenu-title="<?php echo $this->lang->line('side_settings');?>">
                     <?php if ($user['permission'] == 'admin'){?>
                         <li>
-                            <a href="#"><i class="sl sl-icon-settings">
+                            <a href="<?php echo site_url('main/general')?>"><i class="sl sl-icon-settings">
                                 </i> <?php echo $this->lang->line('side_general');?></a></li>
                     <?php }?>
                     <li><a href="<?php echo site_url('main/myAccount');?>"><i class="sl sl-icon-user"></i> <?php echo $this->lang->line('side_my_account');?></a></li>
                     <?php if ($user['permission'] == 'admin'){?>
                         <li>
-                            <a href="#"><i class="sl sl-icon-list">
+                            <a href="<?php echo site_url('main/auditLog');?>"><i class="sl sl-icon-list">
                                 </i> <?php echo $this->lang->line('side_audit');?></a></li>
                     <?php }?>
                     <li><a href="<?php echo site_url('user/logout') ?>"><i class="sl sl-icon-power"></i> <?php echo $this->lang->line('logout');?></a></li>

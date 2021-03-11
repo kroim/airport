@@ -29,7 +29,7 @@
 <script src="<?php echo base_url('assets/back/calendar/fullcalendar.min.js')?>"></script>
 <script src="<?php echo base_url('assets/back/calendar/bootbox.js')?>"></script>
 
-<!--<!-- page specific plugin scripts -->-->
+<!--<!-- page specific plugin scripts -->
 <!--<script src="--><?php //echo base_url('assets/table/js/jquery.dataTables.min.js')?><!--"></script>-->
 <!--<script src="--><?php //echo base_url('assets/table/js/jquery.dataTables.bootstrap.min.js')?><!--"></script>-->
 <!--<script src="--><?php //echo base_url('assets/table/js/dataTables.buttons.min.js')?><!--"></script>-->

@@ -66,4 +66,34 @@ class UserModel extends CI_Model{
         $this->db->where('id', $data['id']);
         $this->db->update('users', $data);
     }
+    function getUsers(){
+        $this->db->select('*');
+        $this->db->from($this->userTable);
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+
+    function updateUsers($group_id, $user_ids){
+        $this->db->where('group_id', $group_id);
+        $this->db->update('users', ['group_id' => -1]);
+        if (sizeof($user_ids) != 0){
+            $this->db->where_in('id', $user_ids);
+            $this->db->update('users', ['group_id' => $group_id]);
+        }
+    }
+    function deleteUserGroup($group_id){
+        $this->db->where('group_id', $group_id);
+        $this->db->update('users', ['group_id' => -1]);
+    }
+
+    function getUserById($id){
+        $this->db->select('*');
+        $this->db->from($this->userTable);
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return $result;
+    }
+
 }

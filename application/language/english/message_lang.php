@@ -18,13 +18,26 @@ $lang['confirm_password'] = "Confirm Password";
 $lang['login'] = "Login";
 $lang['logout'] = "Logout";
 $lang['aircraft'] = "Aircraft";
+$lang['action'] = "Action";
+$lang['add'] = "Add";
+$lang['edit'] = "Edit";
+$lang['date'] = "Date";
+$lang['delete'] = "Delete";
 $lang['register'] = "Register";
 $lang['here'] = "Here";
 $lang['account_check_msg1'] = "Do you have account?";
 $lang['account_check_msg2'] = "Don't you have account?";
 $lang['submit'] = "Submit";
-$lang['add'] = "Add";
+
 $lang['view'] = "View";
+$lang['category'] = "Category";
+$lang['reference'] = "Reference";
+$lang['number'] = "Number";
+$lang['description'] = "Description";
+$lang['due_on'] = "Due On";
+$lang['notes'] = "Notes";
+$lang['renew'] = "Renew";
+$lang['severity'] = "Severity";
 
 // side bar
 $lang['side_dashboard'] = "Dashboard";
@@ -34,7 +47,7 @@ $lang['side_categories'] = "Categories";
 $lang['side_settings'] = "Settings";
 $lang['side_general'] = "General";
 $lang['side_my_account'] = "My Account";
-$lang['side_audit'] = "Audit";
+$lang['side_audit'] = "Audit Log";
 
 // dashboard
 $lang['da_due'] = "Due";
@@ -70,3 +83,7 @@ $lang['country'] = "Country";
 $lang['current_password'] = "Current Password";
 $lang['new_password'] = "New Password";
 $lang['retype_password'] = "Retype Password";
+$lang['group'] = "Group";
+$lang['tasks'] = "Tasks";
+
+

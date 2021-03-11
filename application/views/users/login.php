@@ -24,9 +24,14 @@
 </head>
 <body style="background-image: url('<?php echo base_url("assets/images/aircraft-01.png")?>'); width: 100%; height: 100%; margin: 0;">
 <div style="padding-top: 12%; margin: 0;">
-    <div class="col-lg-7 col-md-7 col-xs-2"></div>
+    <div class="col-lg-2 col-md-2"></div>
+    <div class="col-lg-3 col-md-3" style="background-color: white; padding: 3% 2%; margin-top: 2%;">
+        <img src="https://im5.ezgif.com/tmp/ezgif-5-f1f1e524b7.gif" width="100%">
+    </div>
+    <div class="col-lg-2 col-md-2 col-xs-2"></div>
     <div class="col-lg-2 col-md-2 col-xs-8" style="background-color: #00ff1f70; padding: 2% 2%">
-        <h2 style="text-align: center; color: orange;"><?php echo $this->lang->line('aircraft');?></h2>
+        <h2 style="text-align: center; color: orange;">A.S.D.E.R</h2>
+<!--        <h2 style="text-align: center; color: orange;">--><?php //echo $this->lang->line('aircraft');?><!--</h2>-->
         <form action="" method="post">
             <?php echo $this->lang->line('user_email');?>
             <input type="email" style="font-size: 20px;" id="user-email" class="form-control" name="user-email" required>

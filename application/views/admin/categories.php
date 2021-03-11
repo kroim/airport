@@ -38,11 +38,10 @@
                         </th>
                         <th>Name</th>
                         <th>Critical</th>
-<!--                        <th>Enabled</th>-->
-                        <th class="hidden-480">Reference Number Name</th>
+                        <th>Reference Number Name</th>
                         <th class="hidden-480">Description Name</th>
                         <th class="hidden-480">Due On Name</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,43 +56,17 @@
                         </td>
                         <td id="c_name_<?php echo $all_category->id; ?>"><?php echo $all_category->name; ?></td>
                         <td id="c_critical_<?php echo $all_category->id; ?>"><?php echo $all_category->critical;?></td>
-<!--                        <td class="hidden-480">--><?php //echo $all_category->enabled?><!--</td>-->
                         <td id="c_ref_num_name_<?php echo $all_category->id; ?>"><?php echo $all_category->ref_num_name; ?></td>
                         <td class="hidden-480" id="c_desc_name_<?php echo $all_category->id; ?>"><?php echo $all_category->desc_name; ?></td>
                         <td class="hidden-480" id="c_due_on_name_<?php echo $all_category->id; ?>"><?php echo $all_category->due_on_name; ?></td>
                         <td>
-                            <div class="hidden-sm hidden-xs action-buttons">
+                            <div class="action-buttons">
                                 <button onclick='edit_category(<?php echo $all_category->id;?>)'>
                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                 </button>
                                 <button onclick='delete_category(<?php echo $all_category->id;?>)'>
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </button>
-                            </div>
-                            <div class="hidden-md hidden-lg">
-                                <div class="inline pos-rel">
-                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                        <i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                        <li>
-                                            <button class="tooltip-success" data-rel="tooltip" title="Edit" onclick='edit_category(<?php echo $all_category->id;?>)'>
-                                                <span>
-                                                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                                </span>
-                                            </button>
-                                        </li>
-
-                                        <li>
-                                            <button class="tooltip-error" data-rel="tooltip" title="Delete" onclick='delete_category(<?php echo $all_category->id;?>)'>
-                                                <span>
-                                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                                </span>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </td>
                     </tr>
@@ -243,25 +216,9 @@
 
         new $.fn.dataTable.Buttons( myTable, {
             buttons: [
-//                {
-//                    "extend": "colvis",
-//                    "text": "<i class='fa fa-search bigger-110 blue'></i> <span class='hidden'>Show/hide columns</span>",
-//                    "className": "btn btn-white btn-primary btn-bold",
-//                    columns: ':not(:first):not(:last)'
-//                },
                 {
                     "extend": "csv",
                     "text": "<i class='fa fa-database bigger-110 orange'></i> <span class='hidden'>Export to CSV</span>",
-                    "className": "btn btn-white btn-primary btn-bold"
-                },
-                {
-                    "extend": "excel",
-                    "text": "<i class='fa fa-file-excel-o bigger-110 green'></i> <span class='hidden'>Export to Excel</span>",
-                    "className": "btn btn-white btn-primary btn-bold"
-                },
-                {
-                    "extend": "pdf",
-                    "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i> <span class='hidden'>Export to PDF</span>",
                     "className": "btn btn-white btn-primary btn-bold"
                 },
                 {
@@ -269,28 +226,11 @@
                     "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
                     "className": "btn btn-white btn-primary btn-bold",
                     autoPrint: false,
-                    message: '<h2>This print was produced using the Print button for DataTables</h2>'
+                    message: '<h2>Print button for DataTables</h2>'
                 }
             ]
         } );
         myTable.buttons().container().appendTo( $('.tableTools-container') );
-
-        //style the message box
-
-
-        var defaultColvisAction = myTable.button(0).action();
-        myTable.button(0).action(function (e, dt, button, config) {
-
-            defaultColvisAction(e, dt, button, config);
-
-
-            if($('.dt-button-collection > .dropdown-menu').length == 0) {
-                $('.dt-button-collection')
-                    .wrapInner('<ul class="dropdown-menu dropdown-light dropdown-caret dropdown-caret" />')
-                    .find('a').attr('href', '#').wrap("<li />")
-            }
-            $('.dt-button-collection').appendTo('.tableTools-container .dt-buttons')
-        });
 
 
         myTable.on( 'select', function ( e, dt, type, index ) {
@@ -360,5 +300,5 @@
             else $row.removeClass(active_class);
         });
 
-    })
+    });
 </script>

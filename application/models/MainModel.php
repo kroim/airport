@@ -44,4 +44,60 @@ class MainModel extends CI_Model{
         $this->db->where('id', $id);
         $this->db->delete('categories');
     }
+    // Get Logs
+    function getLogs(){
+        $this->db->select('*');
+        $this->db->from('log');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    // Add Logs
+    function addLogs($data){
+        $this->db->insert('log', $data);
+        $this->db->insert_id();
+    }
+    // Tasks
+    function getTasksAll(){
+        $this->db->select('*');
+        $this->db->from('tasks');
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function getUserTasks($user_id){
+        $this->db->select('*');
+        $this->db->from('tasks');
+        $this->db->where('user_id', $user_id);
+        $this->db->where("type !=", "renew");
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function getTasks($userId, $categoryId){
+        $this->db->select('*');
+        $this->db->from('tasks');
+        $this->db->where('user_id', $userId);
+        $this->db->where('category_id', $categoryId);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    function addTasks($data){
+        $this->db->insert('tasks', $data);
+        $this->db->insert_id();
+    }
+    function editTasks($data){
+        $this->db->where('id', $data['id']);
+        $this->db->update('tasks', $data);
+    }
+    function deleteTasks($id){
+        $this->db->where('id', $id);
+        $this->db->delete('tasks');
+    }
+
+    // Dashboard Table Text
+    function getDashboardText($user_id){
+        $this->db->select('*');
+        $this->db->from('custom');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
