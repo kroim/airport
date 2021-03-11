@@ -50,7 +50,7 @@ foreach ($user_tasks as $user_task) {
         <!-- Item -->
         <div class="col-lg-4 col-md-4 col-xs-12">
             <div class="dashboard-stat color-3">
-                <div class="dashboard-stat-content"><h4><?php echo $overdue_num; ?></h4> <span><?php echo $this->lang->line('da_over')." ".$this->lang->line('da_due');?></span></div>
+                <div class="dashboard-stat-content"><h4><?php echo $overdue_num; ?></h4> <span><?php echo $this->lang->line('da_overdue')?></span></div>
                 <div class="dashboard-stat-icon"><i class="im im-icon-Add-UserStar"></i></div>
             </div>
         </div>
@@ -118,6 +118,34 @@ foreach ($user_tasks as $user_task) {
     </div>
 
 </div>
+
+<button id="print_modal_btn" data-toggle="modal" data-target="#print-modal" style="display: none"></button>
+<div class="modal fade" id="print-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgba(255,143,0,0.62); border-bottom-color: blue;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="00font-family: 'Times New Roman'">Print</h3>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Print Title</h4>
+                            <input id="print_title" name="dm_task_ref_num" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="print_modal()"><?php echo $this->lang->line('modal_yes');?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_no');?></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
 <!-- Content / End -->
 
 <!-- page specific plugin scripts -->
@@ -135,6 +163,9 @@ foreach ($user_tasks as $user_task) {
 <script src="<?php echo base_url('assets/table/js/dataTables.select.min.js')?>"></script>
 
 <script>
+    function print_modal(){
+        $("#print-btn").click();
+    }
     jQuery(function($) {
         // initiate dataTables plugin
         var myTable =
@@ -159,11 +190,19 @@ foreach ($user_tasks as $user_task) {
                     "className": "btn btn-white btn-primary btn-bold"
                 },
                 {
+                    "extend": "copy",
+                    "text": "<i class='fa fa-print bigger-110 grey' onclick='$(\"#print_modal_btn\").click();'></i> <span class='hidden'>Print</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
                     "extend": "print",
-                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
-                    "className": "btn btn-white btn-primary btn-bold",
-                    autoPrint: false,
-                    message: '<h2>This print was produced using the Print button for DataTables</h2>'
+                    "text": "<i class='fa fa-print bigger-110 grey' id='print-btn' style='display: none'></i>",
+                    "className": "",
+                    autoPrint: true,
+                    title: function(){
+                        var printTitle = $("#print_title").val();
+                        return '<h2 id="print-header" style="text-align: center">'+printTitle+'</h2>'
+                    }
                 }
             ]
         } );

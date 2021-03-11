@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Aircraft Register</title>
+    <title> A.S.D.E.R Register</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -23,12 +23,12 @@
 
 
 </head>
-<body style="background-image: url('<?php echo base_url("assets/images/aircraft-01.png")?>'); ">
+<body style="">
 <div>
     <div class="row" style="padding-top: 10%; margin: 0;">
         <div class="col-lg-6 col-md-6 col-xs-2"></div>
-        <div class="col-lg-3 col-md-3 col-xs-8" style="background-color: #008000ab; padding: 2% 3%">
-            <h2 style="text-align: center; color: orange;"><?php echo $this->lang->line('aircraft');?></h2>
+        <div class="col-lg-3 col-md-3 col-xs-8" style="background-color: #4f81bd; padding: 2% 3%">
+            <h2 style="text-align: center; color: orange;">A.S.D.E.R</h2>
             <?php echo form_error('name','<span class="help-block">','</span>'); ?>
             <?php echo form_error('email','<span class="help-block">','</span>'); ?>
             <?php echo form_error('conf_password','<span class="help-block">','</span>'); ?>
@@ -68,6 +68,13 @@
             <p class="footInfo"><?php echo $this->lang->line('account_check_msg1')?>
                 <a href="<?php echo site_url("user/login"); ?>" style="color: white;"><?php echo $this->lang->line('login')." ".$this->lang->line('here')?></a>
             </p>
+            <div style="text-align: center;">
+                <div style="margin-top: -5px; padding-top: ;">
+                    <h4 style="color: darkblue; padding-top: 10px;">Feras A Abduldaim</h4>
+                    <h4 style="color: darkblue">Abduldaim.FA@sgs.org.sa</h4>
+                    <h4 style="color: darkblue; padding-bottom: 10px;">0545969295</h4>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-2"></div>
     </div>

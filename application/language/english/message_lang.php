@@ -17,7 +17,7 @@ $lang['password'] = "Password";
 $lang['confirm_password'] = "Confirm Password";
 $lang['login'] = "Login";
 $lang['logout'] = "Logout";
-$lang['aircraft'] = "Aircraft";
+$lang['aircraft'] = "A.S.D.E.R";
 $lang['action'] = "Action";
 $lang['add'] = "Add";
 $lang['edit'] = "Edit";
@@ -53,6 +53,7 @@ $lang['side_audit'] = "Audit Log";
 $lang['da_due'] = "Due";
 $lang['da_critical'] = "Critical";
 $lang['da_over'] = "Over";
+$lang['da_overdue'] = "Over Due";
 $lang['da_calendar'] = "Calendar";
 $lang['da_recent_activities'] = "Recent Activities";
 
@@ -67,6 +68,8 @@ $lang['modal_no'] = "No";
 $lang['modal_save'] = "SAVE";
 $lang['modal_close'] = "CLOSE";
 $lang['modal_ref_name'] = "Reference Number Name";
+$lang['modal_add_task'] = "Add Task";
+$lang['modal_ref'] = "Reference Number";
 $lang['modal_desc_name'] = "Description Name";
 $lang['modal_due_name'] = "Due On Name";
 $lang['edit_modal_title'] = "Edit Category";
@@ -85,5 +88,6 @@ $lang['new_password'] = "New Password";
 $lang['retype_password'] = "Retype Password";
 $lang['group'] = "Group";
 $lang['tasks'] = "Tasks";
+
 
 

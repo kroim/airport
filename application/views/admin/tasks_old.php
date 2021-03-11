@@ -15,9 +15,6 @@
     .modal-backdrop{
         z-index: auto;
     }
-    /*#file_view object{*/
-        /*height: 500px !important;*/
-    /*}*/
 </style>
 <div class="dashboard-content">
     <!-- Titlebar -->
@@ -28,23 +25,24 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
-            <button class="btn btn-success" data-toggle="modal" data-target="#add-task-modal"><i class="fa fa-plus"></i> <?php echo $this->lang->line('add');?></button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#add-task-modal"><i class="fa fa-plus"></i> Add New</button>
             <div class="modal fade" id="add-task-modal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: rgba(42,30,214,0.22); border-bottom-color: blue;">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h3 class="modal-title" style="00font-family: 'Times New Roman'"><?php echo $this->lang->line('modal_add_task');?></h3>
+                            <h3 class="modal-title" style="00font-family: 'Times New Roman'"><?php echo $this->lang->line('add')." ".$this->lang->line('tasks');?></h3>
                         </div>
                         <form method="post" action="<?php echo site_url('main/addTask') ?>">
                             <div class="modal-body">
                                 <div class="row">
                                     <input name="am_task_category_id" value="<?php echo $category_names[0]->id;?>" style="display: none" required>
                                     <div class="col-md-12">
-                                        <h4><?php echo $this->lang->line('modal_ref');?></h4>
+                                        <h4><?php echo $this->lang->line('reference')." ".$this->lang->line('number');?></h4>
                                         <input class="form-control" id="am_task_ref_num" name="am_task_ref_num" required>
                                     </div>
                                 </div>
@@ -57,8 +55,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4><?php echo $this->lang->line('due_on');?></h4>
-                                        <input class="form-control datepicker" placeholder="yyyy-mm-dd" id="am_due_on" name="am_due_on" required data-date-format="yyyy-mm-dd">
-
+                                        <input type="date" class="form-control" id="am_due_on" name="am_due_on" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -94,8 +91,8 @@
                         <th><?php echo $category_names[0]->ref_num_name;?></th>
                         <th class="hidden-480"><?php echo $category_names[0]->desc_name;?></th>
                         <th class="hidden-480"><?php echo $category_names[0]->due_on_name;?></th>
-                        <th class="hidden-480"><?php echo $this->lang->line('notes');?></th>
-                        <th><?php echo $this->lang->line('action');?></th>
+                        <th class="hidden-480">Notes</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -125,9 +122,6 @@
                                         </button>
                                         <button onclick='delete_task(<?php echo $task->id; ?>)'>
                                             <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                                        </button>
-                                        <button onclick='attachment(<?php echo $task->id; ?>)'>
-                                            <i class="ace-icon fa fa-folder bigger-130"></i>
                                         </button>
                                     </div>
                                 </td>
@@ -171,7 +165,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4><?php echo $this->lang->line('due_on');?></h4>
-                            <input class="form-control datepicker" placeholder="yyyy-mm-dd" id="em_due_on" name="em_due_on" required data-date-format="yyyy-mm-dd">
+                            <input type="date" class="form-control" id="em_due_on" name="em_due_on" required>
                         </div>
                     </div>
                     <div class="row">
@@ -214,7 +208,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4><?php echo $this->lang->line('renew')." ".$this->lang->line('due_on');?></h4>
-                            <input class="form-control datepicker" placeholder="yyyy-mm-dd" id="rm_due_on" name="rm_due_on" required data-date-format="yyyy-mm-dd">
+                            <input type="date" class="form-control" id="rm_due_on" name="rm_due_on" required>
                         </div>
                     </div>
                 </div>
@@ -258,94 +252,6 @@
     </div>
 </div>
 
-<button id="print_modal_btn" data-toggle="modal" data-target="#print-modal" style="display: none"></button>
-<div class="modal fade" id="print-modal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(255,143,0,0.62); border-bottom-color: blue;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title" style="00font-family: 'Times New Roman'">Print</h3>
-            </div>
-            <form>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Print Title</h4>
-                            <input id="print_title" name="dm_task_ref_num" class="form-control" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="print_modal()"><?php echo $this->lang->line('modal_yes');?></button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_no');?></button>
-                </div>
-            </form>
-        </div>
-
-    </div>
-</div>
-
-<!--File Upload Modal-->
-<button id="attach_modal_btn" data-toggle="modal" data-target="#attach-modal" style="display: none"></button>
-<div class="modal fade" id="attach-modal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(255,143,0,0.62); border-bottom-color: blue;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title" style="00font-family: 'Times New Roman'">Files</h3>
-            </div>
-                <div class="modal-body">
-                    <div class="row" id="f_attached" style="padding: 0 3%;"></div>
-                    <hr>
-                    <div class="row" style="padding: 0 3%;">
-                        <div class="col-md-12" id="f_preview">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <form method="POST" enctype="multipart/form-data" id="upload_form">
-                                            <input class="btn btn-warning" name="attach_file" accept=".png,.jpg,.docx,doc,.pdf,.txt" type="file" id="select-file-tag" onchange="load_profile(event)"/>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-4" id="img_prev">
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input id="file_task_id" style="display: none;">
-                                        <input type="button" class="btn btn-success" id="file_submit" onclick="upload_file()" value="Upload">
-                                    </div>
-
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="upload_save()"><?php echo $this->lang->line('modal_save');?></button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_close');?></button>
-
-                </div>
-        </div>
-
-    </div>
-</div>
-
-<!--File View Modal-->
-<button id="view_modal_btn" data-toggle="modal" data-target="#view-modal" style="display: none"></button>
-<div class="modal fade" id="view-modal" role="dialog">
-    <div class="modal-dialog" style="width: 80%;">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgba(255,236,237,0.13); border-bottom-color: blue;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" id="file_view" style="padding: 0"></div>
-        </div>
-
-    </div>
-</div>
-<input type="hidden" id="delete_fileList" />
 <!-- page specific plugin scripts -->
 <script type="text/javascript" src="<?php echo base_url('assets/table/js/jquery-2.1.4.min.js')?>"></script>
 <!--<script type="text/javascript" src="--><?php //echo base_url('assets/back/scripts/jquery-2.2.0.min.js')?><!--"></script>-->
@@ -359,11 +265,8 @@
 <script src="<?php echo base_url('assets/table/js/buttons.print.min.js')?>"></script>
 <script src="<?php echo base_url('assets/table/js/buttons.colVis.min.js')?>"></script>
 <script src="<?php echo base_url('assets/table/js/dataTables.select.min.js')?>"></script>
-<script src="<?php echo base_url('assets/date/js/bootstrap-datepicker.js')?>"></script>
-<script src="<?php echo base_url('assets/js/dropzone.js')?>"></script>
 
 <script type="text/javascript">
-
     function edit_task(id){
         $("#em_task_id").val(id);
         $("#em_task_ref_num").val($("#task_ref_num_"+id).html());
@@ -384,147 +287,6 @@
         $("#dm_task_id").val(id);
         $("#dm_task_ref_num").val($("#task_ref_num_"+id).html());
         $("#delete_task_btn").click();
-    }
-    function attachment(id){
-        $.ajax(
-            {
-                url:"<?php echo base_url(); ?>upload/getFiles",
-                type: "post",
-                data:{
-                    task_id: id
-                },
-                success:function (response) {
-                    if(response != false){
-                        $("#f_attached").html("");
-                        var files = JSON.parse(response);
-                        for(var i = 0; i < files.length; i++){
-                            var fileName = files[i].split('/').pop();
-                            var html = '<div class="row" id="attached_'+i+'"><div class="col-md-8">';
-                            html += '<a href="#" onclick="attachedFileView(\''+fileName+'\')">'+fileName+'</a></div>';
-                            html += '<div class="col-md-2">';
-                            html +='<i class="fa fa-trash" onclick="delete_file('+i+','+id+',\''+fileName+'\')"></i></div>';
-                            html +='<div class="col-md-2">';
-                            html +='<a href="<?php echo base_url()?>upload/'+fileName+'" download><i class="fa fa-cloud-download"></i></a></div></div>';
-                            $("#f_attached").append(html);
-                        }
-                    }
-                }
-            }
-        );
-        $("#file_task_id").val(id);
-        $("#attach_modal_btn").click();
-    }
-    function fileview(){
-        $("#view_modal_btn").click();
-    }
-    function upload_save(){
-        var file_data = $("#delete_fileList").val();
-        $.ajax(
-            {
-                url: "<?php echo base_url(); ?>upload/delete_files",
-                type: "post",
-                data: {
-                    files: file_data
-                },
-                success: function(response){
-                    console.log(response);
-                }
-            }
-        );
-        location.reload();
-    }
-    function delete_file(id, task_id, filename){
-        console.log(id);
-        console.log(task_id);
-        console.log(filename);
-        var task = {id: task_id, name: filename};
-        $('#attached_'+id).html('');
-        var list = $("#delete_fileList").val();
-        console.log(list);
-        var objList = list ? JSON.parse(list ): [];
-        objList.push(task);
-        console.log(objList);
-        $("#delete_fileList").val(JSON.stringify(objList))
-    }
-    function attachedFileView(filename){
-        var extension = filename.split('.').pop();
-        var data = "upload/" + filename;
-        if(extension == "pdf"){
-            $("#file_view").html('<object data="<?php echo base_url()?>'+data+'" type="application/pdf" height="500px" width="100%"></object>');
-        }else if(extension == "docx" || extension == "doc"){
-            $("#file_view").html('<iframe class="doc" src="https://docs.google.com/gview?url=<?php echo base_url()?>'+data+'&embedded=true" style="height: 500px; width: 100%"></iframe>');
-        }else if(extension == "txt"){
-            $("#file_view").html('<object data="<?php echo base_url()?>'+data+'" style="height: 500px; width: 100%" type="text/plain"></object>');
-            $("#file_view object").css({height:'auto!important'});
-        }else if(extension == "png" || extension == "jpg"){
-            $("#file_view").html('<img src="<?php echo base_url()?>'+data+'" style="width: 100%;"/>');
-        }
-        $("#view_modal_btn").click();
-    }
-    function load_profile(event){
-        try{
-            var file = event.target.files[0];
-            var fileName = file['name'];
-            var extension = fileName.split('.').pop();
-            $.ajax({
-                url:"<?php echo base_url(); ?>upload/load_file",
-                method:"POST",
-                data: new FormData(document.getElementById("upload_form")),
-                contentType: false,
-                cache: false,
-                processData:false,
-                success:function(data)
-                {
-                    if(extension == "pdf"){
-                        $("#file_view").html('<object data="<?php echo base_url()?>'+data+'" type="application/pdf" height="500px" width="100%"></object>');
-                    }else if(extension == "docx" || extension == "doc"){
-                        $("#file_view").html('<iframe class="doc" src="https://docs.google.com/gview?url=<?php echo base_url()?>'+data+'&embedded=true" width="100%"></iframe>');
-                    }else if(extension == "txt"){
-                        $("#file_view").html('<object data="<?php echo base_url()?>'+data+'" style="height: 500px; width: 100%" type="text/plain"></object>');
-                        $("#file_view object").css({height:'auto!important'});
-                    }else if(extension == "png" || extension == "jpg"){
-                        $("#file_view").html('<img src="<?php echo base_url()?>'+data+'" style="width: 100%;"/>');
-                    }
-                }
-            });
-            if (['bmp', 'gif', 'png', 'jpg', 'jpeg'].indexOf(extension) > -1) {
-                $("#img_prev").html("<img src='<?php echo base_url("assets/images/image_logo.png")?>' onclick='fileview()' style='width: 100px; height: 100px;'/>");
-            } else if(['docx'].indexOf(extension) > -1) {
-                $("#img_prev").html("<img src='<?php echo base_url("assets/images/doc_logo.png")?>' onclick='fileview()' style='width: 100px; height: 100px;'/>");
-            } else if(['pdf'].indexOf(extension) > -1){
-                $("#img_prev").html("<img src='<?php echo base_url("assets/images/pdf_logo.png")?>' onclick='fileview()' style='width: 100px; height: 100px;'/>");
-            } else if(['txt'].indexOf(extension) > -1){
-                $("#img_prev").html("<img src='<?php echo base_url("assets/images/txt_logo.png")?>' onclick='fileview()' style='width: 100px; height: 100px;'/>");
-            }
-        }catch (except){
-            console.log(except)
-        }
-    }
-    function upload_file() {
-        if($('#select-file-tag').prop('files').length == 0){
-            alert("Please Select file.")
-        }else{
-            var id = $("#file_task_id").val();
-            var file_data = $('#select-file-tag').prop('files')[0];
-            var form_data = new FormData();
-            form_data.append('file', file_data);
-            form_data.append('task_id', id);
-            $.ajax({
-                url:"<?php echo base_url(); ?>upload/index",
-                method:"POST",
-                data: form_data,
-                contentType: false,
-                cache: false,
-                processData:false,
-                success:function(response)
-                {
-                    console.log(response);
-                }
-            });
-        }
-    }
-    function print_modal(){
-        $("#print-btn").click();
     }
     jQuery(function($) {
         //initiate dataTables plugin
@@ -547,7 +309,6 @@
         $.fn.dataTable.Buttons.defaults.dom.container.className = 'dt-buttons btn-overlap btn-group btn-overlap';
 
         new $.fn.dataTable.Buttons( myTable, {
-
             buttons: [
                 {
                     "extend": "csv",
@@ -555,19 +316,11 @@
                     "className": "btn btn-white btn-primary btn-bold"
                 },
                 {
-                    "extend": "copy",
-                    "text": "<i class='fa fa-print bigger-110 grey' onclick='$(\"#print_modal_btn\").click();'></i> <span class='hidden'>Print</span>",
-                    "className": "btn btn-white btn-primary btn-bold"
-                },
-                {
                     "extend": "print",
-                    "text": "<i class='fa fa-print bigger-110 grey' id='print-btn' style='display: none'></i>",
-                    "className": "",
-                    autoPrint: true,
-                    title: function(){
-                        var printTitle = $("#print_title").val();
-                        return '<h2 id="print-header" style="text-align: center">'+printTitle+'</h2>'
-                    }
+                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
+                    "className": "btn btn-white btn-primary btn-bold",
+                    autoPrint: false,
+                    message: '<h2>This print was produced using the Print button for DataTables</h2>'
                 }
             ]
         } );
@@ -639,12 +392,6 @@
             if(this.checked) $row.addClass(active_class);
             else $row.removeClass(active_class);
         });
-
-        $('.datepicker').datepicker();
-
-
-
-
 
     });
 </script>

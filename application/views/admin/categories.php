@@ -164,6 +164,64 @@
 
     </div>
 </div>
+
+<button id="delete_task_btn" data-toggle="modal" data-target="#delete-task-modal" style="display: none"></button>
+<div class="modal fade" id="delete-task-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgba(255,143,0,0.62); border-bottom-color: blue;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="00font-family: 'Times New Roman'"><?php echo $this->lang->line('delete')." ".$this->lang->line('tasks');?></h3>
+            </div>
+            <form method="post" action="<?php echo site_url('main/deleteTask') ?>">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Are you sure to delete this category?</h4>
+                            <input name="dm_task_category_id" value="<?php echo $category_names[0]->id;?>" style="display: none" required>
+                            <input id="dm_task_id" name="dm_task_id" style="display: none" required>
+                            <input id="dm_task_ref_num" name="dm_task_ref_num" style="display: none" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info" name="dm_task_submit" value="dm_task_submit"><?php echo $this->lang->line('modal_yes');?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_no');?></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<button id="print_modal_btn" data-toggle="modal" data-target="#print-modal" style="display: none"></button>
+<div class="modal fade" id="print-modal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgba(255,143,0,0.62); border-bottom-color: blue;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" style="00font-family: 'Times New Roman'">Print</h3>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Print Title</h4>
+                            <input id="print_title" name="dm_task_ref_num" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="print_modal()"><?php echo $this->lang->line('modal_yes');?></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('modal_no');?></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
 <!-- page specific plugin scripts -->
 <script type="text/javascript" src="<?php echo base_url('assets/table/js/jquery-2.1.4.min.js')?>"></script>
 <!--<script type="text/javascript" src="--><?php //echo base_url('assets/back/scripts/jquery-2.2.0.min.js')?><!--"></script>-->
@@ -191,6 +249,9 @@
     function delete_category(id){
         $("#dm_category_id").val(id);
         $("#delete_category_btn").click();
+    }
+    function print_modal(){
+        $("#print-btn").click();
     }
     jQuery(function($) {
         //initiate dataTables plugin
@@ -222,11 +283,19 @@
                     "className": "btn btn-white btn-primary btn-bold"
                 },
                 {
+                    "extend": "copy",
+                    "text": "<i class='fa fa-print bigger-110 grey' onclick='$(\"#print_modal_btn\").click();'></i> <span class='hidden'>Print</span>",
+                    "className": "btn btn-white btn-primary btn-bold"
+                },
+                {
                     "extend": "print",
-                    "text": "<i class='fa fa-print bigger-110 grey'></i> <span class='hidden'>Print</span>",
-                    "className": "btn btn-white btn-primary btn-bold",
-                    autoPrint: false,
-                    message: '<h2>Print button for DataTables</h2>'
+                    "text": "<i class='fa fa-print bigger-110 grey' id='print-btn' style='display: none'></i>",
+                    "className": "",
+                    autoPrint: true,
+                    title: function(){
+                        var printTitle = $("#print_title").val();
+                        return '<h2 id="print-header" style="text-align: center">'+printTitle+'</h2>'
+                    }
                 }
             ]
         } );

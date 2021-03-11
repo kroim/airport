@@ -31,12 +31,13 @@ class Main extends BaseController{
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             if ($data['user']['permission'] == 'manager'){
-                $group_category = $this->GroupModel->getGroupById($data['user']['group_id']);
-                $category_ids = array();
-                if($group_category['category_ids'] != -1){
+                if($data['user']['group_id'] == -1){
+                    $data['user_categories'] = array();
+                }else{
+                    $group_category = $this->GroupModel->getGroupById($data['user']['group_id']);
                     $category_ids = unserialize($group_category['category_ids']);
+                    $data['user_categories'] = $this->MainModel->getCategories($category_ids);
                 }
-                $data['user_categories'] = $this->MainModel->getCategories($category_ids);
                 $data['user_tasks'] = $this->MainModel->getUserTasks($data['user']['id']);
             }elseif ($data['user']['permission'] == 'admin'){
                 $data['user_tasks'] = $this->MainModel->getTasksAll();
@@ -51,7 +52,7 @@ class Main extends BaseController{
                 $c_category = $this->MainModel->getCategories($c_id);
                 $c_critical = intval($c_category[0]->critical);
                 if ($diff_days < 0) $data['user_tasks'][$index]->severity = "Overdue";
-                elseif ($diff_days < $c_critical) $data['user_tasks'][$index]->severity = "Critical";
+                elseif ($diff_days <= $c_critical) $data['user_tasks'][$index]->severity = "Critical";
                 elseif ($diff_days > $c_critical) $data['user_tasks'][$index]->severity = "Due";
                 $data['user_tasks'][$index]->categoryName = $c_category[0]->name;
             }
@@ -134,7 +135,22 @@ class Main extends BaseController{
     public function deleteCategoryName(){
         if($this->input->post()){
             $id =  $this->input->post('dm_category_id');
-            var_dump($id);
+            // Edit Group
+            $c_ids = array();
+            $groups = $this->GroupModel->getRows();
+            foreach ($groups as $group){
+                $category_ids = unserialize($group->category_ids);
+                foreach ($category_ids as $index => $category_id){
+                    if ($category_id == $id){
+                        unset($category_ids[$index]);
+                    }
+                }
+                $c_ids['id'] = $group->id;
+                $c_ids['category_ids'] = serialize($category_ids);
+                $this->GroupModel->updateRow($c_ids);
+            }
+            // Delete Tasks from Category
+            $this->MainModel->deleteTasksByCategory($id);
             $this->MainModel->deleteCategory($id);
             redirect('main/viewAllCategory');
         }else{
@@ -147,9 +163,15 @@ class Main extends BaseController{
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             if ($data['user']['permission'] == 'manager'){
-                $data['user_categories'] = $this->MainModel->getCategories([2,3,4]);
-                //load the view
+                if($data['user']['group_id'] == -1){
+                    $data['user_categories'] = array();
+                }else{
+                    $group_category = $this->GroupModel->getGroupById($data['user']['group_id']);
+                    $category_ids = unserialize($group_category['category_ids']);
+                    $data['user_categories'] = $this->MainModel->getCategories($category_ids);
+                }
             }
+            //load the view
             $this->load->view('users/header', $data);
             $this->load->view('admin/myaccount', $data);
             $this->load->view('users/footer');
@@ -229,7 +251,6 @@ class Main extends BaseController{
             }
             echo (json_encode($result));
         } elseif ($type == 'update'){
-
             $data['id'] = $this->input->post('selGroup');
             $cat_ids = $this->input->post('catIds');
             $user_ids = $this->input->post('userIds');
@@ -305,7 +326,13 @@ class Main extends BaseController{
         if($this->session->userdata('isUserLoggedIn')){
             $data['user'] = $this->UserModel->getRows(array('id'=>$this->session->userdata('userID')));
             if ($data['user']['permission'] != 'admin') {
-                $data['user_categories'] = $this->MainModel->getCategories([2,3,4]);
+                if($data['user']['group_id'] == -1){
+                    $data['user_categories'] = array();
+                }else{
+                    $group_category = $this->GroupModel->getGroupById($data['user']['group_id']);
+                    $category_ids = unserialize($group_category['category_ids']);
+                    $data['user_categories'] = $this->MainModel->getCategories($category_ids);
+                }
                 $userId = $data['user']['id'];
                 $categoryId = $id;
                 $data['tasks'] = $this->MainModel->getTasks($userId, $categoryId);
@@ -379,7 +406,7 @@ class Main extends BaseController{
                 $category = $this->MainModel->getCategories($category_id);
                 $current_date = date("Y-m-d h:i:sa");
                 $log = array(
-                    'log_category' => $category[0]['name'],
+                    'log_category' => $category[0]->name,
                     'log_ref_num' => $this->input->post('em_task_ref_num'),
                     'log_user_n' => $data['user']['name'],
                     'log_user_e' => $data['user']['email'],
@@ -421,7 +448,7 @@ class Main extends BaseController{
                 $category = $this->MainModel->getCategories($category_id);
                 $current_date = date("Y-m-d h:i:sa");
                 $log = array(
-                    'log_category' => $category[0]['name'],
+                    'log_category' => $category[0]->name,
                     'log_ref_num' => $this->input->post('rm_task_ref_num'),
                     'log_user_n' => $data['user']['name'],
                     'log_user_e' => $data['user']['email'],
@@ -451,7 +478,7 @@ class Main extends BaseController{
                 $category = $this->MainModel->getCategories($category_id);
                 $current_date = date("Y-m-d h:i:sa");
                 $log = array(
-                    'log_category' => $category[0]['name'],
+                    'log_category' => $category[0]->name,
                     'log_ref_num' => $this->input->post('dm_task_ref_num'),
                     'log_user_n' => $data['user']['name'],
                     'log_user_e' => $data['user']['email'],

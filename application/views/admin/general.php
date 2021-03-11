@@ -875,6 +875,7 @@
                     },
                     success:function(response)
                     {
+                        alert("Add Success!");
 //                        console.log(response);
                         //$(".chkUser").prop('checked', false);
                         //$(".chkCat").prop('checked', false);
@@ -935,6 +936,7 @@
                     },
                     success:function(response)
                     {
+                        alert("Update Success!");
 //                        console.log(response);
                     }
                 }

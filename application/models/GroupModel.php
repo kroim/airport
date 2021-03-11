@@ -34,7 +34,6 @@ class GroupModel extends CI_Model{
     }
 
     public function updateRow($data = array()){
-
         $this->db->where('id', $data['id']);
         $this->db->update('group', $data);
     }

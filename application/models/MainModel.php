@@ -79,6 +79,13 @@ class MainModel extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
+    function getTaskById($id){
+        $this->db->select('*');
+        $this->db->from('tasks');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
     function addTasks($data){
         $this->db->insert('tasks', $data);
         $this->db->insert_id();
@@ -91,7 +98,10 @@ class MainModel extends CI_Model{
         $this->db->where('id', $id);
         $this->db->delete('tasks');
     }
-
+    function deleteTasksByCategory($category_id){
+        $this->db->where('category_id', $category_id);
+        $this->db->delete('tasks');
+    }
     // Dashboard Table Text
     function getDashboardText($user_id){
         $this->db->select('*');
